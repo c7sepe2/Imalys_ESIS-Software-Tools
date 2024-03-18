@@ -13,7 +13,7 @@ For detailed information please refer to our [tutorials](Imalys_Tutorial.pdf), t
 ___
 
 
-![Change](/docs/img/Change_Bode_Hohes-Holz_Großer-Bruch_2014-21.png)
+![Change](images/Hohes-Holz_Großer-Bruch.png)
 
 *Change between spring and autumn calculated as variance during the growing seasons 2014 to 2021. The image is segmented to a seamless mosaic of zones with homogeneous features. Values calculated from Landsat-8 scenes at the Bode catchment (Saxonia, Germany). Value range [0 … 0.5] depicted as blue … red*
 
