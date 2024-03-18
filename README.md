@@ -6,7 +6,7 @@ In the ESIS project [XYZ] we are trying to put environmental indicators on a wel
 
 Most of the methods and analyses implemented in *Imalys* are also available with commercial software and/or open source solutions. The decisive factor for the *Imalys* concept was to bundle all necessary commands and parameters into one process that contains all sub-steps and (depending on the application) only requires location, time and resulting indicators as input. 
 
-*Imalys* was designed as a collection of building blocks (tools) to extract defined landscape properties (traits) from public available data. The whole process chain is controlled by predefined hooks and runs without manual interaction. The tools are interchangeable and can be rearranged for new tasks. *Imalys* is available as [source code](Imalys/source) and as [executable](Imalys/executables) files. *Imalys* is designed to run under a server environment but can also be used on any PC.
+*Imalys* was designed as a collection of building blocks (tools) to extract defined landscape properties (traits) from public available data. The whole process chain is controlled by predefined hooks and runs without manual interaction. The tools are interchangeable and can be rearranged for new tasks. *Imalys* is available as [source code](code) and as [executable](executables) files. *Imalys* is designed to run under a server environment but can also be used on any PC.
 
 For detailed information please refer to our [tutorials](Imalys_Tutorial.pdf), the [process description](Imalys_Process.pdf) or the [background documents](Imalys_Background.pdf) .
 
