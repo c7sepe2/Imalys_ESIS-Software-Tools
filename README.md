@@ -1,6 +1,6 @@
 ## Imalys – ESIS tool for Image Analysis
 
-(images/tools.svg) under construction
+![tools](images/tools.svg) under construction
 
 In the ESIS project [XYZ] we are trying to put environmental indicators on a well-defined and reproducible basis. The *Imalys* software library is supposed to generate the remote sensing products defined for ESIS. The library provides tools to select, extract, transform and combine raster and vector data. Image quality, landscape diversity, change and different landuse types can be analyzed in time and space. Landuse borders can be delineated and typical landscape structures can be characterized by a self adjusting process.
 
