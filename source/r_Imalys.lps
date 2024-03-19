@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="r_Imalys.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="23" Y="8"/>
+        <UsageCount Value="57"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="loop.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Loop"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="104"/>
+        <CursorPos X="54" Y="128"/>
+        <UsageCount Value="57"/>
+        <Bookmarks Count="1">
+          <Item0 X="19" Y="75"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="format.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="928"/>
+        <CursorPos X="7" Y="949"/>
+        <UsageCount Value="57"/>
+        <Bookmarks Count="1">
+          <Item0 X="19" Y="826" ID="1"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="x_Imalys.lpr"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="22" Y="9"/>
+        <UsageCount Value="9"/>
+      </Unit>
+      <Unit>
+        <Filename Value="custom.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="615"/>
+        <CursorPos X="18" Y="635"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="provide.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="224"/>
+        <CursorPos Y="129"/>
+        <UsageCount Value="9"/>
+      </Unit>
+      <Unit>
+        <Filename Value="/usr/share/fpcsrc/3.2.2/packages/rtl-objpas/src/inc/strutils.pp"/>
+        <UnitName Value="StrUtils"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="10" Y="199"/>
+        <UsageCount Value="10"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="164" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="165" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="153" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="155" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="156" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="157" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="159" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="160" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="153" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="155" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="156" TopLine="133"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="169" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="157" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="164" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="157" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="160" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="157" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="160" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="164" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="157" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="160" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="164" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="157" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="160" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="157" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="160" TopLine="142"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="174" Column="78" TopLine="147"/>
+      </Position>
+      <Position>
+        <Filename Value="format.pas"/>
+        <Caret Line="364" Column="14" TopLine="344"/>
+      </Position>
+      <Position>
+        <Filename Value="loop.pas"/>
+        <Caret Line="169" Column="61" TopLine="141"/>
+      </Position>
+      <Position>
+        <Filename Value="format.pas"/>
+        <Caret Line="364" Column="14" TopLine="344"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode="default">
+        <Mode Name="default">
+          <local>
+            <CommandLineParams Value="/home/c7sepe2/Pascal/Hooks/commands /home/c7sepe2/Pascal/Hooks/variables"/>
+          </local>
+        </Mode>
+      </Modes>
+    </RunParams>
+    <HistoryLists>
+      <List Name="LaunchingApplication" Type="File" Count="1">
+        <Item1 Value="/usr/bin/gnome-terminal -t &apos;Lazarus Run Output&apos; -e &apos;$(LazarusDir)/tools/runwait.sh $(TargetCmdLine)&apos;"/>
+      </List>
+      <List Name="CommandLineParameters" Count="5">
+        <Item1 Value="/home/c7sepe2/Pascal/Hooks/commands /home/c7sepe2/Pascal/Hooks/variables"/>
+        <Item2 Value="/home/c7sepe2/Pascal/Hooks/commands /home/c7sepe2/Pascal/Hooks/replace"/>
+        <Item3 Value="/home/c7sepe2/Pascal/Hooks/traits_var_test /home/c7sepe2/Pascal/Hooks/variables_test"/>
+        <Item4 Value="/home/c7sepe2/Pascal/Hooks/import_05-07_test /home/c7sepe2/Pascal/Hooks/variables_test"/>
+        <Item5 Value="/home/c7sepe2/Pascal/Hooks/commands /home/c7sepe2/Pascal/Hooks/variables_test"/>
+      </List>
+    </HistoryLists>
+  </ProjectSession>
+</CONFIG>
