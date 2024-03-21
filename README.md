@@ -8,7 +8,7 @@ Most of the methods and analyses implemented in *Imalys* are also available with
 
 *Imalys* was designed as a collection of building blocks (tools) to extract defined landscape properties (traits) from public available data. The whole process chain is controlled by predefined hooks and runs without manual interaction. The tools are interchangeable and can be rearranged for new tasks. *Imalys* is available as [source code](source/README.md) and as [executable](binaries/README.md) files. *Imalys* is designed to run under a server environment but can also be used on any PC.
 
-For detailed information please refer to our [tutorials](tutorial/README.md), the [process description](docments/0_index.md) or the [background documents](documents/background/README.md) .
+For detailed information please refer to our [tutorials](tutorial/README.md), the [process description](docments/0_Index.md) or the [background documents](documents/background/README.md) .
 
 ___
 
