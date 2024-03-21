@@ -22,15 +22,15 @@ ___
 
 ### Get Started
 
-The easiest way to learn about *Imalys* is to run one of the [tutorials](Imalys_Tutorial.pdf). Copy and extract the [tutorial archive](tutorial.zip) to a place where you have writing permissions and follow the description. The archive includes image data, process chains, binary files and a stepwise description how to use them. The only thing you have to add is the [GDAL library](https://github.com/OSGeo/GDAL).
+The easiest way to learn about *Imalys* is to run one of the [tutorials](tutorial/README.md). Copy and extract the [tutorial archive]() to a place where you have writing permissions and follow the description. The archive includes image data, process chains, binary files and a stepwise description how to use them. The only thing you have to add is the [GDAL library](https://github.com/OSGeo/GDAL).
 
 ### Installation
 
-The *Imalys* [binary files](binaries) need no installation. They can be simply copied to your */usr/local/bin* directory. To run *Imalys* the GDAL library must be available under your */usr/bin/* directory. The GDAL library can be obtained from [GitHub](https://github.com/OSGeo/GDAL). If you run Quantum-Gis the library is already installed. For details please refer to our [tutorials](Imalys_Tutorial.pdf).
+The *Imalys* [binary files](binaries/README.md) need no installation. They can be simply copied to your */usr/local/bin* directory. To run *Imalys* the GDAL library must be available under your */usr/bin/* directory. The GDAL library can be obtained from [GitHub](https://github.com/OSGeo/GDAL). If you run Quantum-Gis the library is already installed. For details please refer to our [manual](documents/README.md).
 
 ### Usage
 
-Each tutorial comes with explanations for this process. The tutorials describe in depth the installation, use and combination of all *Imalys* tools. For expert users the background of important algorithms is explained at the [background](Imalys_Background) document. An online documentation is available at [GitLab](Imalys_Background).
+Each tutorial comes with explanations for this process. The tutorials describe in depth the installation, use and combination of all *Imalys* tools. For expert users the background of important algorithms is explained at the [background](documents/backgroud/README.md) document. An online documentation is available at [GitLab]().
 
 ### Changelog
 
