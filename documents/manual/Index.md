@@ -5,7 +5,7 @@ The following pages give an overview how to call and control *Imalys*. As *Imaly
 The *Imalys* process chain is controlled by 12 different commands and their parameters. The commands in the process chain also serve as filename of the results and as field names in tables. Therefore the names are short and can have a much wider meaning in general usage. 
 Each command needs a separate line. Each parameter must be given as “name = value” pair according to a dictionary. The following lessons explain each command and parameter and give hints for their application. The background of the processes, dependencies among them are explained at [background](../background/Index.md). The following commands are currently implemented:
 
-**[Home:](1_Home.md)** Select a working directory and define paths for protocols.
+**[Home:](./1_Home.md)** Select a working directory and define paths for protocols.
 
 **[Catalog:](2_Catalog.md)** Create a database with the position and acquisition times of archived image data
 
