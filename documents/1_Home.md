@@ -8,7 +8,7 @@ Final results can be stored with the [export](11_Export.md) command at a differe
 
 ------
 
-#### Directory
+### Directory
 
 **Assign or create a working directory**
 
@@ -18,7 +18,7 @@ Final results can be stored with the [export](11_Export.md) command at a differe
 
 ------
 
-#### Clear
+### Clear
 
 **Clear the working directory**
 
@@ -26,7 +26,7 @@ Final results can be stored with the [export](11_Export.md) command at a differe
 
 Most processes will produce various intermediate results. If the final result of the last run is stored at a separate directory, the working directory should be cleared at the beginning of each process chain.
 
-#### log
+### Log
 
 **Set a message directory**
 
@@ -43,3 +43,7 @@ home
 ```
 
 In this case the default working directory is used but the messages are directed to a results directory. “IMALYS” at the beginning of the first line is mandatory. The remainder of the line is ignored and can be used for hints
+
+------
+
+[Index](0_Index.md)

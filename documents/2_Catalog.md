@@ -6,7 +6,7 @@ The Catalog command was implied to select appropriate archives for an [Import](3
 
 ------
 
-#### Archives
+### Archives
 
 **Select a directory and a subset of an image archives collection**
 
@@ -22,3 +22,7 @@ catalog
 ```
 
 This command will select all Landsat 8/9 archives in the users directory ESIS/archives.
+
+------
+
+[Index](0_Index.md)

@@ -14,7 +14,7 @@ The *principal* component rotation tries to extract the most significant image p
 
 *Reduce* accepts more than one *execute* call for the same image. All results are stored at the working directory and named as the process.
 
-#### select
+### Select
 
 **Mark one image of the working directory to be processed**
 
@@ -22,7 +22,7 @@ The *principal* component rotation tries to extract the most significant image p
 
 More than one image can be processed at the same time if they are stacked using the [compile](4_Compile.md) command
 
-#### variance
+### Variance
 
 **Variance based on standard deviation**
 
@@ -32,7 +32,7 @@ The *variance* parameter determines the variance of individual pixels based on a
 
 ​	![image-20240319181352369](/home/c7sepe2/snap/typora/86/.config/Typora/typora-user-images/image-20240319181352369.png)	v: values; i: items; n: item count
 
-#### regression
+### Regression
 
 **Regression based on standard deviation**
 
@@ -42,7 +42,7 @@ The *regression* parameter returns the regression of individual pixels of all ba
 
 ​	![image-20240319181602245](/home/c7sepe2/snap/typora/86/.config/Typora/typora-user-images/image-20240319181602245.png)	t: time; v: values; i: items; n: item count
 
-#### flat
+### Flat
 
 **Reduce all results to one band**
 
@@ -52,7 +52,7 @@ The *flat* process uses the first principal component of all bands to reduce a m
 
 ​	<img src="/home/c7sepe2/snap/typora/86/.config/Typora/typora-user-images/image-20240319181755114.png" alt="image-20240319181755114" style="zoom:80%;" />	v: values; i: items
 
-#### difference
+### Difference
 
 **Euklidian distance of two (multiband) images**
 
@@ -62,7 +62,7 @@ The process returns the difference between two images. The result a multispectra
 
 ​	![image-20240319182407876](/home/c7sepe2/snap/typora/86/.config/Typora/typora-user-images/image-20240319182407876.png)	v: pixel value
 
-#### NirV, NDVI, EVI
+### NirV, NDVI, EVI
 
 **Near infrared vegetation index (NIRv)**
 **Normalized vegetation Index (NDVI)**
@@ -74,7 +74,7 @@ Both the NIRv and the NDVI index are calculated as the product of near infrared 
 
 NirV: ![image-20240319182841085](/home/c7sepe2/snap/typora/86/.config/Typora/typora-user-images/image-20240319182841085.png)	N: Near infrared value; R: Red band value
 
-#### LAI (deactivated)
+### LAI (deactivated)
 
 **Leaf cover per area**
 
@@ -82,7 +82,7 @@ NirV: ![image-20240319182841085](/home/c7sepe2/snap/typora/86/.config/Typora/typ
 
 The *LAI* parameter gives the proportion of leaf surface compared to the ground surface covered by the plants. The LAI was introduced as a proxy for field work. Simulated LAI values by means of remote sensing are of minor quality.
 
-#### brightness
+### Brightness
 
 **First principal component of all bands**
 
@@ -92,7 +92,7 @@ The process returns the brightness of all bands in the passed image. For multisp
 
 ​	![image-20240319183231922](/home/c7sepe2/snap/typora/86/.config/Typora/typora-user-images/image-20240319183231922.png)	v: values; i: items; 
 
-#### principal
+### Principal
 
 **Principal component rotation**
 
@@ -100,7 +100,7 @@ The process returns the brightness of all bands in the passed image. For multisp
 
 The process extracts the first *count* principal components from a n-dimensional image. The process tries to extract the most significant image properties to a smaller number of bands. 
 
-#### count
+### Count
 
 **Image dimensions after principal component rotation**
 
@@ -110,7 +110,7 @@ only together with *principal*
 
 The *count* parameter restricts the rotation to *count* steps. Without *count* the result of the rotations has one dimension less than the original.
 
-#### mean
+### Mean
 
 **Arithmetic mean of all bands**
 
@@ -120,7 +120,7 @@ The *mean* parameter gives the arithmetic mean of all image bands provided. For 
 
 ​	![image-20240319183835174](/home/c7sepe2/snap/typora/86/.config/Typora/typora-user-images/image-20240319183835174.png)	v: values; i: items; n: item count
 
-#### median
+### Median
 
 **Most common value for each pixel from a stack of bands**
 
@@ -130,7 +130,7 @@ The median reflects the most common value of each pixel in a stack of bands or i
 
 ​	*Value in the middle of a sorted value list.*
 
-#### bestof
+### Bestof
 
 **Automatically choose the most appropriate generalization**
 
@@ -138,7 +138,7 @@ The median reflects the most common value of each pixel in a stack of bands or i
 
 The *bestof* process returns an optimized image from one or more images with lesser quality. The typical import is a short time course. *Bestof* works better if the input images show no holes.
 
-#### target
+### Target
 
 **Rename the result of the last command**
 
@@ -146,7 +146,7 @@ The *bestof* process returns an optimized image from one or more images with les
 
 The *target* option renames the result of the last command. The new name is restricted to the working directory. Only the last result will be modified. Choose the [export]() command to store one or more results at a different place.
 
-#### Example
+### Example
 
 ```
 IMALYS [reduce]
@@ -168,3 +168,7 @@ In this example two *reduce* processes follow each other. The first reduces the 
 A *target* is given to rename the result of the reduction. Without a *target* the second *reduce* process would override the result of the first. The second *reduce* uses the result of the first to calculate the normalized vegetation index. 
 
 Files stored in the working directory can be called only by their name.
+
+-----
+
+[Index](0_Index.md)

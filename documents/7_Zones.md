@@ -30,7 +30,7 @@ The density of zones is mainly controlled by the *size* parameter. The input is 
 
 ------
 
-#### bonds
+### Bonds
 
 **Select low, medium, high or accurate size bounding**
 
@@ -40,7 +40,7 @@ The medium size of the zones given by the *size* parameter can be applied rather
 
 ------
 
-#### sieve
+### Sieve
 
 **Merge small zones with larger ones**
 
@@ -50,7 +50,7 @@ Very small zones like single pixels or short pixel rows may not be desired. The 
 
 ------
 
-#### Example
+### Example
 
 ```
 IMALYS [zones]
@@ -62,3 +62,7 @@ zones
 ```
 
 The zones example uses the result of a [compile](4_Compile.md) process to create new zones. The *bonds* option allows largely different size of the resulting zones and the whole process is terminated by *size* as the mean size of all zones reaches about 50 pixels.
+
+-----
+
+[Index](0_Index.md)

@@ -12,7 +12,7 @@ The *fabric* option uses existing zones to find and characterize spatial pattern
 
 ------
 
-#### select
+### Select
 
 **Mark an image or zones to be classified**
 
@@ -22,7 +22,7 @@ To classify *pixel* or *zones* a source image must be passed. The *fabric* proce
 
 ------
 
-#### equalize
+### Equalize
 
 **Normalize all values to the same range**
 
@@ -32,7 +32,7 @@ If image features with very different value ranges are to be classified, the val
 
 ------
 
-#### pixels
+### Pixels
 
 **Classifies spectral combinations**
 
@@ -42,7 +42,7 @@ The *pixels* option selects a pixel-oriented classification of the given image d
 
 ------
 
-#### zones
+### Zones
 
 **Classifies all attributes of the given zones**
 
@@ -52,7 +52,7 @@ The command uses all attributes of the given *zones* for the classification proc
 
 ------
 
-#### fabric
+### Fabric
 
 **creates and classifies image objects**
 
@@ -62,7 +62,7 @@ In this context adjacent zones with a specific combination of features are calle
 
 ------
 
-#### double
+### Double
 
 **Defines a large environment for the *fabric* process**
 
@@ -72,7 +72,7 @@ Fabric can use a large environment to define image object properties but the opt
 
 ------
 
-#### classes
+### Classes
 
 **Specifies the number of classes or objects to be created**
 
@@ -82,7 +82,7 @@ The number of classes should not be too large. Overclassification reduces the ac
 
 ------
 
-#### samples
+### Samples
 
 **Specifies the number of samples to train the classifier**
 
@@ -92,7 +92,7 @@ To find clusters in the feature space *mapping* uses samples from the image data
 
 ------
 
-#### values
+### Values
 
 **Show classification result with “natural” colors**
 
@@ -102,7 +102,7 @@ The primary classification result is a raster layer with class IDs as values and
 
 ------
 
-#### entropy
+### Entropy
 
 **Add a class dependent diversity**
 
@@ -115,7 +115,7 @@ This process is deprecated. We recommend to use Rao’s diversity based on zones
 
 ------
 
-#### radius
+### Radius
 
 **Select the kernel size for the *entropy* extension**
 
@@ -124,7 +124,7 @@ This process is deprecated. We recommend to use Rao’s diversity based on zones
 The kernel radius is defined as the number of pixels between the center and the border of the kernel. The radius “1” produces a 3x3 pixels kernel. Zero is not accepted.
 input value
 
-#### Example
+### Example
 
 ```
 IMALYS [mapping]
@@ -137,3 +137,7 @@ mapping
 ```
 
 The classification of pixels, zones and patterns with the *fabric* option differ considerably in their internal processes. Most convenient will be the classification of zones based on a feature table stored at the working directory as shown in this example. *Index* and *zones* select the zones geometry and features to be classified. In our experience 30 different classes are a good starting point to specify about 15 land uses in a natural landscape. 
+
+-----
+
+[Index](0_Index.md)

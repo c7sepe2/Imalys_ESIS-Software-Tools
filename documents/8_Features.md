@@ -18,7 +18,7 @@ During [zones](7_Zones.md) creation only the boundaries of the individual areas 
 
 ------
 
-#### Delete
+### Delete
 
 **Delete the existing attributes and create a new table**
 
@@ -26,7 +26,7 @@ During [zones](7_Zones.md) creation only the boundaries of the individual areas 
 
 ------
 
-#### Select
+### Select
 
 **Assign spectral features as zone attributes**
 
@@ -36,7 +36,7 @@ The *select* process adds all spectral features of the selected image to the att
 
 ------
 
-#### entropy
+### Entropy
 
 **Pixel diversity following Rao’s proposal**
 
@@ -48,7 +48,7 @@ The *entropy* process returns the spectral diversity of all pixels within one zo
 
 ------
 
-#### texture
+### Texture
 
 **Pixel texture for individual zones**
 
@@ -60,7 +60,7 @@ The *texture* process returns the mean difference between all pixel pairs within
 
 ------
 
-#### normal
+### Normal
 
 **Normalized pixel texture for individual zones**
 
@@ -72,7 +72,7 @@ As the *texture* process does, *normal* returns  the mean difference between all
 
 ------
 
-#### dendrites
+### Dendrites
 
 **Quotient of zone perimeter and cellsize**
 
@@ -84,7 +84,7 @@ As the *texture* process does, *normal* returns  the mean difference between all
 
 ------
 
-#### diversity
+### Diversity
 
 **Spectral diversity of the central zone and all neighbors**
 
@@ -96,7 +96,7 @@ The spectral diversity between zones is calculated as the statistical deviation 
 
 ------
 
-#### proportion
+### Proportion
 
 **Size diversity of the central zone and all neighbors**
 
@@ -108,7 +108,7 @@ The spectral diversity between zones is calculated as the statistical deviation 
 
 ------
 
-#### relation
+### Relation
 
 **Quotient of neighbors and perimeter of one zone**
 
@@ -120,7 +120,7 @@ The spectral diversity between zones is calculated as the statistical deviation 
 
 ------
 
-#### cellsize
+### Cellsize
 
 **Size of the zones given as [ha]**
 
@@ -132,7 +132,7 @@ The size of the zones is calculated as the sum of all pixels covering the zone. 
 
 ------
 
-#### diffusion
+### Diffusion
 
 **Emphasize local maxima and minima for all features**
 
@@ -144,7 +144,7 @@ The *diffusion* process is only controlled by the number of iterations. Each ite
 
 ------
 
-#### values
+### Values
 
 **Raster representation of a vector map with attributes**
 
@@ -152,7 +152,7 @@ The *diffusion* process is only controlled by the number of iterations. Each ite
 
 The *values* process creates a multi band raster image from the geometry and the attributes of the different polygons. *Values* mainly serves as a control feature. 
 
-#### Example
+### Example
 
 ```
 IMALYS [features]
@@ -170,3 +170,7 @@ features
 ```
 
 This example creates a new feature set from spectral and geometry features. Spectral features are taken from the predefined selection “compile”, seven textural and morphological features are added. Features can be selected without restrictions.
+
+-----
+
+[Index](0_Index.md)

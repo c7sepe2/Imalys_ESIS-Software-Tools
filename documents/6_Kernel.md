@@ -16,7 +16,7 @@ Kernel processes are always accompanied by a soft focus effect. The [features]()
 
 ------
 
-#### Select
+### Select
 
 **Mark one image at the working directory to be processed**
 
@@ -26,7 +26,7 @@ More than one image can be processed at the same time if they are stacked using 
 
 ------
 
-#### Radius
+### Radius
 
 **Select the kernel size**
 
@@ -36,7 +36,7 @@ The kernel radius is defined as the number of pixels between the center and the 
 
 ------
 
-#### Texture
+### Texture
 
 **Extract the local texture of each pixels environment**
 
@@ -48,7 +48,7 @@ The *texture* process extracts the differences between each pixel and its neighb
 
 ------
 
-#### Normal
+### Normal
 
 **Extract a density normalized texture of each pixels environment**
 
@@ -60,7 +60,7 @@ The normalized texture does the same as *texture* but with normalized brightness
 
 ------
 
-#### Inverse
+### Inverse
 
 **Inverse Difference Moment (IDM)**
 
@@ -72,7 +72,7 @@ The *inverse* process creates a new image with the Inverse Difference Moment (ID
 
 ------
 
-#### Deviation
+### Deviation
 
 **Rao‘s diversity based on pixels**
 
@@ -87,7 +87,7 @@ Rao’s diversity uses variance instead of texture to evaluate the spectral dive
 
 ------
 
-#### Entropy
+### Entropy
 
 **Rao‘s diversity based on classes**
 
@@ -102,7 +102,7 @@ Rao’s diversity can also be based on classes. The classes can exist or calcula
 
 ------
 
-#### Lowpass
+### Lowpass
 
 **Reduce the local contrast**
 
@@ -114,9 +114,9 @@ The *lowpass* process reduces the local contrast of the image data according to 
 
 ------
 
-#### Laplace
+### Laplace
 
-#### inner, outer
+### inner, outer
 
 **Enhance the local contrast**
 
@@ -130,7 +130,7 @@ The *lowpass* process reduces the local contrast of the image data according to 
 
 ------
 
-#### elevation
+### elevation
 
 **Extract slope, exposition and shade from an elevation model**
 
@@ -140,7 +140,7 @@ The command generates three layers called “slope”, “exposition” and “s
 
 ------
 
-#### hillshade
+### hillshade
 
 **Superimpose image data with shading from an elevation model**
 
@@ -150,7 +150,7 @@ The *hillshade* process can superimpose the shading over each other image thus p
 
 ------
 
-#### target
+### target
 
 **Rename the result of the last command**
 
@@ -160,7 +160,7 @@ The *target* option renames the result of the last command. The new name is rest
 
 ------
 
-#### Example
+### Example
 
 ```
 IMALYS [kernel]
@@ -179,3 +179,7 @@ kernel
 ```
 
 For this example two images stored as Geo-Tiff at the users “results” directory are used to calculate two textures and the Laplace edge detection. External images must be stacked and stored in the working directory ([Compile](4_Compile.md)) before they can be processed. The new name “period” is assigned to call the kernel process. The process returns the textures using a 5x5 pixel kernel and the edge detection result with a 3:1 enhancement.
+
+-----
+
+[Index](0_Index.md)

@@ -8,7 +8,7 @@ To operate the repeat mode, *Imalys* must be called with *r_Imalys* and two para
 
 ------
 
-#### Replace
+### Replace
 
 **Replace locally defined variables**
 
@@ -18,7 +18,7 @@ If a process chain should be used for different tasks, the command chain can use
 
 ------
 
-#### Repeat
+### Repeat
 
 **Replace variables using a value list**
 
@@ -32,7 +32,7 @@ To operate a large amount of different tasks, the variables can be given by a te
 
 ------
 
-#### Examples
+### Examples
 
 ```
 IMALYS [replace]
@@ -67,3 +67,7 @@ c7934	München
 The second example shows a process chain (upper) and a variable list (lower). All variables for one run of the process chain must be given in one line. Each line will induce another run of the process chain. In his case the process chain will be repeated for the four cities Hannover, Leipzig, Chemnitz and München. The example must be called as
 
 `r_Imalys ProcessChain VariableList`
+
+-----
+
+[Index](0_Index.md)

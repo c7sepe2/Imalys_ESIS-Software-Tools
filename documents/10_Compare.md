@@ -10,7 +10,7 @@ The standard result of *compare* command is an accuracy table. Using the *contro
 
 ------
 
-#### Reference
+### Reference
 
 **Selects a class reference (raster or vector)**
 
@@ -22,7 +22,7 @@ Reference classes are assigned to the [Mapping](9_Mapping.md) results by means o
 
 ------
 
-#### Raster
+### Raster
 
 **Stores a vectorized classification to a raster layer**
 
@@ -32,7 +32,7 @@ Vector layers can not be compared directly. The *raster* option allows to save t
 
 ------
 
-#### Fieldname
+### Fieldname
 
 **Marks a field in the reference table that contains class names**
 
@@ -42,7 +42,7 @@ The option *fieldname* marks the equally called column in the reference data as 
 
 ------
 
-#### Assign
+### Assign
 
 **Assign class names from a reference classification**
 
@@ -52,7 +52,7 @@ The option *assign* transfers the class names of the references to the results o
 
 ------
 
-#### Control
+### Control
 
 **Stores additional accuracy information**
 
@@ -60,3 +60,7 @@ The option *assign* transfers the class names of the references to the results o
 
 The *control* option creates an image *accuracy* at the working directory where only accurate classification results are depicted, a table *combination* with all links between reference and classification and a table *specifity* with more accuracy measures. 
 generic
+
+-----
+
+[Index](0_Index.md)

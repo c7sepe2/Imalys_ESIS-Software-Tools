@@ -12,7 +12,7 @@ If the selected ROI (*frame*) is dissipated over different archives of the same 
 
 ------
 
-#### database
+### Database
 
 **Select an image archive collection database**
 
@@ -22,7 +22,7 @@ If the selected ROI (*frame*) is dissipated over different archives of the same 
 
 ------
 
-#### select
+### Select
 
 **Select image archives by a filename mask**
 
@@ -32,7 +32,7 @@ If the selected ROI (*frame*) is dissipated over different archives of the same 
 
 ------
 
-#### distance
+### Distance
 
 **Select the minimum coverage of the archive for a given frame**
 
@@ -42,7 +42,7 @@ If the selected ROI (*frame*) is dissipated over different archives of the same 
 
 ------
 
-#### period
+### Period
 
 **Select a time interval for image acquisition**
 
@@ -52,7 +52,7 @@ If the selected ROI (*frame*) is dissipated over different archives of the same 
 
 ------
 
-#### frame
+### Frame
 
 **Cut out parts of the images**
 
@@ -62,7 +62,7 @@ Satellite images are provided in partly overlapping tiles. A polygon or at least
 
 ------
 
-#### quality
+### Quality
 
 **Apply a quality mask to reject images**
 
@@ -72,7 +72,7 @@ The *quality* parameter defines the lowest partition of undisturbed pixels in th
 
 ------
 
-#### bands
+### Bands
 
 **Select bands to be extracted from the archive**
 
@@ -82,7 +82,7 @@ The *quality* parameter defines the lowest partition of undisturbed pixels in th
 
 ------
 
-#### factor, offset
+### Factor, Offset
 
 **Calibrate raw image data to a defined product**
 
@@ -97,7 +97,7 @@ The input is sensor dependent and may change between the different product level
 
 ------
 
-#### warp, pixel 
+### Warp, Pixel 
 
 **Reproject images and define a pixel size**
 
@@ -110,7 +110,7 @@ To use different images of the same region or to adopt images to given maps the 
 
 ------
 
-#### Example
+### Example
 
 ```
 IMALYS [import]
@@ -131,3 +131,7 @@ import
 This import command selects all archives located up to one tile radius from the center of the *frame* (ROI). A maximum of 14% cloud cover and acquisition dates between May 01 and June 31 are accepted. The six optical bands 2…7 of the Landsat OLI sensor will be extracted and calibrated to TOA reflectance. The projection will be transformed to Zone 32, UTM, WGS84 if necessary. 
 
 Alternatively the archives can be selected directly using the *select* parameter.
+
+------
+
+[Index](0_Index.md)

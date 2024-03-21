@@ -8,7 +8,7 @@ The images can be selected by a time period (*period*), by a filename (*select*)
 
 ------
 
-#### Select
+### Select
 
 **Select images by their filename**
 
@@ -18,7 +18,7 @@ The images can be selected by a time period (*period*), by a filename (*select*)
 
 ------
 
-#### Search
+### Search
 
 **Select images using a search string**
 
@@ -28,7 +28,7 @@ A search string using system wildchars (*,?) is used to select appropriate image
 
 ------
 
-#### Period
+### Period
 
 **Select images of a given time period**
 
@@ -38,7 +38,7 @@ A search string using system wildchars (*,?) is used to select appropriate image
 
 ------
 
-#### Frame
+### Frame
 
 **Cut the result to a given polygon**
 
@@ -48,7 +48,7 @@ If the selected images have different coverages or the result should be restrict
 
 ------
 
-#### Projection
+### Projection
 
 **Override the projection of the selected image**
 
@@ -58,7 +58,7 @@ If “pure” images should be combined with projected ones, the “pure” imag
 
 ------
 
-#### Format
+### Format
 
 **assign a selected image format**
 
@@ -68,7 +68,7 @@ As a standard procedure all image values are transferred to a 32 bit float forma
 
 ------
 
-#### Target
+### Target
 
 **Assign a filename for the compiled image stack**
 
@@ -80,7 +80,7 @@ input value
 
 ------
 
-#### Example
+### Example
 
 ```
 IMALYS [compile]
@@ -100,3 +100,7 @@ compile
 ```
 
 The second example stacks all images taken at 2022 from the “result” directory and cuts them to the frame “c4738”. The “TIFF” format is converted to “ENVI” during the stacking process. 
+
+-----
+
+[Index](0_Index.md)
