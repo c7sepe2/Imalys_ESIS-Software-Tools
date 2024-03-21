@@ -93,7 +93,7 @@ Satellite images are provided with values that support easy storage and transpor
 
 The input is sensor dependent and may change between the different product levels of the provider. Calibration values are part of the metadata of the image archives but sometimes they are difficult to find. Examples for most common sensors are given in the [tutorial](../tutorials).
 
-​	![image-20240319141735792](3_factor-offset.png)	R: Result value; v: Value (original); f: Factor (as given); o: Offset (as given)
+​	![image-20240319141735792](../images/3_factor-offset.png)	R: Result value; v: Value (original); f: Factor (as given); o: Offset (as given)
 
 ------
 
