@@ -26,6 +26,8 @@ Final results can be stored with the [export](11_Export.md) command at a differe
 
 Most processes will produce various intermediate results. If the final result of the last run is stored at a separate directory, the working directory should be cleared at the beginning of each process chain.
 
+-----
+
 ### Log
 
 **Set a message directory**
