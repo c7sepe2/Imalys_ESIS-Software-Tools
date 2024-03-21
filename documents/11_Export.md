@@ -6,7 +6,7 @@ The result of the process chain can be exported from the working directory to an
 
 ------
 
-#### Select
+### Select
 
 **Select a raster or vector layer to be exported**
 
