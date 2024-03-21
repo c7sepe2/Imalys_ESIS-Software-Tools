@@ -14,6 +14,8 @@ The *principal* component rotation tries to extract the most significant image p
 
 *Reduce* accepts more than one *execute* call for the same image. All results are stored at the working directory and named as the process.
 
+---
+
 ### Select
 
 **Mark one image of the working directory to be processed**
@@ -21,6 +23,8 @@ The *principal* component rotation tries to extract the most significant image p
 `select = image filename`
 
 More than one image can be processed at the same time if they are stacked using the [compile](4_Compile.md) command
+
+---
 
 ### Variance
 
@@ -32,6 +36,8 @@ The *variance* parameter determines the variance of individual pixels based on a
 
 ​	![image-20240319181352369](../images/5_variance.png)	v: values; i: items; n: item count
 
+---
+
 ### Regression
 
 **Regression based on standard deviation**
@@ -41,6 +47,8 @@ The *variance* parameter determines the variance of individual pixels based on a
 The *regression* parameter returns the regression of individual pixels of all bands in source. *Regression* tries to use the temporal distance of the recordings from the metadata of the images. To do this, the images must have been imported with the [import](3_Import.md) command. The process returns a multispectral image of regressions (see *variance*). Using the *flat* option the result is further reduced to one band.
 
 ​	![image-20240319181602245](../images/5_regression.png)	t: time; v: values; i: items; n: item count
+
+---
 
 ### Flat
 
@@ -52,6 +60,8 @@ The *flat* process uses the first principal component of all bands to reduce a m
 
 ​	![](../images/5_Flat.png)	v: values; i: items
 
+---
+
 ### Difference
 
 **Euklidian distance of two (multiband) images**
@@ -61,6 +71,8 @@ The *flat* process uses the first principal component of all bands to reduce a m
 The process returns the difference between two images. The result a multispectral image of differences. Using the *flat* option the result is further reduced to one band.
 
 ​	![image-20240319182407876](../images/5_Difference.png)	v: pixel value
+
+---
 
 ### NirV, NDVI, EVI
 
@@ -74,6 +86,8 @@ Both the NIRv and the NDVI index are calculated as the product of near infrared 
 
 NirV: ![image-20240319182841085](../images/5_NirV.png)	N: Near infrared value; R: Red band value
 
+---
+
 ### LAI (deactivated)
 
 **Leaf cover per area**
@@ -81,6 +95,8 @@ NirV: ![image-20240319182841085](../images/5_NirV.png)	N: Near infrared value; R
 `execute = LAI`
 
 The *LAI* parameter gives the proportion of leaf surface compared to the ground surface covered by the plants. The LAI was introduced as a proxy for field work. Simulated LAI values by means of remote sensing are of minor quality.
+
+---
 
 ### Brightness
 
@@ -92,6 +108,8 @@ The process returns the brightness of all bands in the passed image. For multisp
 
 ​	![image-20240319183231922](../images/5_brigthness.png.png)	v: values; i: items; 
 
+---
+
 ### Principal
 
 **Principal component rotation**
@@ -99,6 +117,8 @@ The process returns the brightness of all bands in the passed image. For multisp
 `execute = principal`
 
 The process extracts the first *count* principal components from a n-dimensional image. The process tries to extract the most significant image properties to a smaller number of bands. 
+
+---
 
 ### Count
 
@@ -110,6 +130,8 @@ only together with *principal*
 
 The *count* parameter restricts the rotation to *count* steps. Without *count* the result of the rotations has one dimension less than the original.
 
+---
+
 ### Mean
 
 **Arithmetic mean of all bands**
@@ -119,6 +141,8 @@ The *count* parameter restricts the rotation to *count* steps. Without *count* t
 The *mean* parameter gives the arithmetic mean of all image bands provided. For multispectral images, the result is individually calculated for each band. The process returns a multispectral image of mean values (see *variance*). Using the *flat* option the result is further reduced to one band.
 
 ​	![image-20240319183835174](../images/5_mean.png)	v: values; i: items; n: item count
+
+---
 
 ### Median
 
@@ -130,6 +154,8 @@ The median reflects the most common value of each pixel in a stack of bands or i
 
 ​	*Value in the middle of a sorted value list.*
 
+---
+
 ### Bestof
 
 **Automatically choose the most appropriate generalization**
@@ -138,6 +164,8 @@ The median reflects the most common value of each pixel in a stack of bands or i
 
 The *bestof* process returns an optimized image from one or more images with lesser quality. The typical import is a short time course. *Bestof* works better if the input images show no holes.
 
+---
+
 ### Target
 
 **Rename the result of the last command**
@@ -145,6 +173,8 @@ The *bestof* process returns an optimized image from one or more images with les
 `target = filename`
 
 The *target* option renames the result of the last command. The new name is restricted to the working directory. Only the last result will be modified. Choose the [export](11_Export.md) command to store one or more results at a different place.
+
+---
 
 ### Example
 
