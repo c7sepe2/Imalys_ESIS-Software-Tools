@@ -30,7 +30,7 @@ The *Imalys* [binary files](binaries/README.md) need no installation. They can b
 
 ### Usage
 
-*Imalys* must be called with a shell or terminal. All necessary commands and parameters are passed by a single text file. Installation, commands and parameters are described in depth in our [manual](documents/manual/Index.md). A [tutorial](documents/tutorial/README.md) provides examples of all processing steps and the combination of the *Imalys* tools. For expert users important algorithms are discussed in a [background](documents/backgroud/README.md) document.
+*Imalys* must be called with a shell or terminal. All necessary commands and parameters are passed by a single text file. Installation, commands and parameters are described in depth in our [manual](documents/manual/Index.md). A [tutorial](documents/tutorial/README.md) provides examples of all processing steps and the combination of the *Imalys* tools. For expert users important algorithms are discussed in a [background](documents/background/README.md) document.
 
 ### Changelog
 
