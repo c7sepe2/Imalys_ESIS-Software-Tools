@@ -1,6 +1,6 @@
 # Changelog
 
-*Imalys* has been fundamentally reworked, the first version is no longer compatible with the current one. The basic changes are summarized below. Details will be added as required.
+*Imalys* has been fundamentally reworked, the [first version](https://codebase.helmholtz.cloud/esis/Imalys) is no longer compatible with the current one. The basic changes are summarized below. Details will be added as required.
 
 ### Extraction and combination of image archives
 
