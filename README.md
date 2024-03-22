@@ -64,15 +64,15 @@ Copyright(c) 2023, [Helmholtz-Zentrum für Umweltforschung GmbH -- UFZ](https://
 
 ### Publications
 
-Selsam P., Bumberger J., Wellmann T., Pause M., Gey R., Borg E., Lausch A.: Ecosystem Integrity Remote Sensing – Modelling and Service Tool - ESIS/Imalys,
+Lausch A, Selsam P, Pause M, Bumberger J. 2024 Monitoring vegetation-and geodiversity with remote sensing and traits.Phil.Trans.R.Soc.A382: 20230058.https://doi.org/10.1098/rsta.2023.0058
 
-SoftwareX: Selsam P., Lausch A., Bumberger J., Wellmann T.: Imalys – ESIS software library to extract landscape characteristics from remote sensing data
+Selsam P., Bumberger J., Wellmann T., Pause M., Gey R., Borg E., Lausch A.: Ecosystem Integrity Remote Sensing – Modelling and Service Tool - ESIS/Imalys, (accepted)
+
+SoftwareX: Selsam P., Lausch A., Bumberger J., Wellmann T.: Imalys – ESIS software library to extract landscape characteristics from remote sensing data (planned)
 
 ### How to cite Imalys
 
 If Imalys is advancing your research, please cite as:
-
-> Lausch A, Selsam P, Pause M, Bumberger J. 2024 Monitoring vegetation-and geodiversity with remote sensing and traits.Phil.Trans.R.Soc.A382: 20230058.https://doi.org/10.1098/rsta.2023.0058
 
 See also the [CITATION.cff](CITATION.cff).
 
