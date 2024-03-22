@@ -74,8 +74,6 @@ If Imalys is advancing your research, please cite as:
 
 SoftwareX: Selsam P., Lausch A., Bumberger J., Wellmann T.: Imalys – ESIS software library to extract landscape characteristics from remote sensing data (planned)
 
-See also the [CITATION.cff](CITATION.cff).
-
 -----------------
 <a href="https://www.ufz.de/index.php?en=33573">
     <img src="https://git.ufz.de/rdm-software/saqc/raw/develop/docs/resources/images/representative/UFZLogo.png" width="400"/>
