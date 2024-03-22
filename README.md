@@ -36,7 +36,7 @@ The *Imalys* [binary files](binaries/README.md) need no installation. They can b
 
 *Imalys* is under development. The version 0.2 was focused on methods to select and extract appropriate images from large data collections as shipped by the providers and linking them to a seamless and high quality product for a freely selectable region. A time series of the whole of Germany using TK100 sheets with approx. 50,000 image maps is an example of this intention. Tools for change detection, outliers and trends will be the next step.
 
-All notable changes to this project will be documented in [CHANGELOG.md](CHANGELOG.md).
+All notable changes to this project will be documented in our [changelog](CHANGELOG.md).
 
 ### Get involved
 
