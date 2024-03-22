@@ -66,7 +66,7 @@ Copyright(c) 2023, [Helmholtz-Zentrum für Umweltforschung GmbH -- UFZ](https://
 
 Lausch A, Selsam P, Pause M, Bumberger J. 2024 Monitoring vegetation-and geodiversity with remote sensing and traits.Phil.Trans.R.Soc.A382: 20230058.https://doi.org/10.1098/rsta.2023.0058
 
-Selsam P., Bumberger J., Wellmann T., Pause M., Gey R., Borg E., Lausch A.: Ecosystem Integrity Remote Sensing – Modelling and Service Tool - ESIS/Imalys, (accepted)
+Selsam P., Bumberger J., Wellmann T., Pause M., Gey R., Borg E., Lausch A.: Ecosystem Integrity Remote Sensing – Modelling and Service Tool - ESIS/Imalys, remotesensing-2888627 (accepted)
 
 ### How to cite Imalys
 
