@@ -60,8 +60,6 @@ Copyright(c) 2023, [Helmholtz-Zentrum für Umweltforschung GmbH -- UFZ](https://
 
 - Source code: [GNU General Public License 3](https://www.gnu.org/licenses/gpl-3.0.html)
 
-For full details, see [LICENSE](LICENSE.md).
-
 ### Acknowledgements
 
 ### Publications
