@@ -68,11 +68,11 @@ Lausch A, Selsam P, Pause M, Bumberger J. 2024 Monitoring vegetation-and geodive
 
 Selsam P., Bumberger J., Wellmann T., Pause M., Gey R., Borg E., Lausch A.: Ecosystem Integrity Remote Sensing – Modelling and Service Tool - ESIS/Imalys, (accepted)
 
-SoftwareX: Selsam P., Lausch A., Bumberger J., Wellmann T.: Imalys – ESIS software library to extract landscape characteristics from remote sensing data (planned)
-
 ### How to cite Imalys
 
 If Imalys is advancing your research, please cite as:
+
+SoftwareX: Selsam P., Lausch A., Bumberger J., Wellmann T.: Imalys – ESIS software library to extract landscape characteristics from remote sensing data (planned)
 
 See also the [CITATION.cff](CITATION.cff).
 
