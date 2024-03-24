@@ -9,9 +9,9 @@ Each command needs a separate line. Each parameter must be given as “name = va
 
 **[Catalog:](2_Catalog.md)** Create a database with the position and acquisition times of archived image data
 
-**[Import:](3_Import)** Extract images from archives, reproject and cut them to a selected frame, calibrate the values and combine tiles from different archives. 
+**[Import:](3_Import.md)** Extract images from archives, reproject and cut them to a selected frame, calibrate the values and combine tiles from different archives. 
 
-**[Compile:](4_Compile)** Combine, transform and check imported images as input data for all further commands.
+**[Compile:](4_Compile.md)** Combine, transform and check imported images as input data for all further commands.
 
 **[Reduce:](5_Reduce.md)** Combine or compare pixels in different bands, create indices, analyze time series and return principal components.
 
