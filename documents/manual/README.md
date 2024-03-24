@@ -1,1 +1,1 @@
-refer to [Index](Index.md)
+please refer to [Index](Index.md)
