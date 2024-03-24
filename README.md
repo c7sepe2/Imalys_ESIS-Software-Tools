@@ -2,7 +2,7 @@
 
 ![tools](images/tools.svg) under construction
 
-In the ESIS project [XYZ] we are trying to put environmental indicators on a well-defined and reproducible basis. The *Imalys* software library is supposed to generate the remote sensing products defined for ESIS. The library provides tools to select, extract, transform and combine raster and vector data. Image quality, landscape diversity, change and different landuse types can be analyzed in time and space. Landuse borders can be delineated and typical landscape structures can be characterized by a self adjusting process.
+In the ESIS project we are trying to put environmental indicators on a well-defined and reproducible basis. The *Imalys* software library is supposed to generate the remote sensing products defined for ESIS. The library provides tools to select, extract, transform and combine raster and vector data. Image quality, landscape diversity, change and different landuse types can be analyzed in time and space. Landuse borders can be delineated and typical landscape structures can be characterized by a self adjusting process.
 
 Most of the methods and analyses implemented in *Imalys* are also available with commercial software and/or open source solutions. The decisive factor for the *Imalys* concept was to bundle all necessary commands and parameters into one process that contains all sub-steps and (depending on the application) only requires location, time and resulting indicators as input. 
 
