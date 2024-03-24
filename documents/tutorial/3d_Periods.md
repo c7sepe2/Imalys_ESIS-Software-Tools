@@ -4,7 +4,7 @@ In mid-latitudes there are pronounced seasonal periods with changes often greate
 
 In order to depict typical features, trends or outliers, the season of the images should be taken into account. For long time series images of the same season should be preferred. We got no problems to collect enough images for two 40 years time series of Germany, one based on images for May to July, the other for August to October. The results allow to map long and short time developments with the same datasets. An example for a 5 years period is depicted below.
 
-![](/home/c7sepe2/ESIS/GitHub_Documents/images/t3_Seasons.png)
+![](../images/t3_Seasons.png)
 
 Variance of Seasonal Differences ⬥ Time periods May – July and August – October over the years 2017 to 2021 ⬥ Settlements show the smallest seasonal variance, forest (NO) and permanent grassland (S) moderate variance ⬥ Agriculture show all grades (harvest) ⬥ Sensor: Sentinel-2 ⬥  Years: 2017-2021 ⬥ Bands: 2, 3, 4, 8 ⬥ Values: 0.0 (Blue) – (Red) 0.014
 
