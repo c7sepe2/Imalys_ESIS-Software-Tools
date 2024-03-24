@@ -8,10 +8,10 @@
 
 **[2	Seamless image products]()**
 	[2a	Extract, calibrate and crop images](2a_Extract)
-	[2b	Enhance image quality](2b_Quality.md)
-	[2c	Catalog (Image collection database)](2c_Catalog.md)
-	[2d	Import with an Image Catalog](2d_Autoselect.md)
-	[2e	Select and reduce a short time course](2e_Optimize.md)
+ 	[2b	Enhance image quality](2b_Quality.md)
+  	[2c	Catalog (Image collection database)](2c_Catalog.md)
+   	[2d	Import with an Image Catalog](2d_Autoselect.md)
+    	[2e	Select and reduce a short time course](2e_Optimize.md)
 
 **[3	Indices and Pixel Arithmetics]()**
 	[3a	Vegetation indices](3a_Vegetation.md)
