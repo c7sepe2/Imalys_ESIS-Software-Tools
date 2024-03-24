@@ -111,7 +111,7 @@ The primary classification result is a raster layer with class IDs as values and
 The process *entropy* needs a classification to run. If a classification is stored at the working directory or a new classification is called together with *entriopy* the process returns Rao’s entropy based on classes. A sample radius must be given together with the process name.
 This process is deprecated. We recommend to use Rao’s diversity based on zones (see [Kernel](6_Kernel.md): Entropy).
 
-​	![image-20240320124820839](/home/c7sepe2/ESIS/GitHub_Commands/4_Compile.md)	d: spectral distance between classes; p: class frequency; k,i: different classes
+​	![](../images/4_Compile.md)	d: spectral distance between classes; p: class frequency; k,i: different classes
 
 ------
 
