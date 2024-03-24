@@ -1,6 +1,6 @@
 ## T2	Seamless image products
 
-Satellite image data are shipped in compressed archives, the tracks are cut into tiles, different bands are stored to different files and the image values support compression. The [import]() and the [compile]() command are designed to collect the necessary data and combine them to a seamless and calibrated image within a given frame. The second task of the [import]() process is to store all images with a common projection, pixel size and file format.
+Satellite image data are shipped in compressed archives, the tracks are cut into tiles, different bands are stored to different files and the image values support compression. The [import](../manual/3_Import.md) and the [compile](../manual/4_Compile.md) command are designed to collect the necessary data and combine them to a seamless and calibrated image within a given frame. The second task of the [import](../manual/3_Import.md) process is to store all images with a common projection, pixel size and file format.
 
 ![](../images/Spain.png)
 
@@ -8,7 +8,7 @@ Selection points and image data for entomological research at the north of Madri
 
 ------
 
-The [import]() command uses a lot of parameters to return most appropriate images. *Select* accepts the archive name, *frame* cuts the scene to a given region, *period* selects the acquisition time, *quality* rejects images with more than the given partition of errors, *cover* rejects sources with less than the given coverage of the *frame*, *warp* and *pixel* change the projection and finally *factor* and *offset* transfer the result into calibrated values. Except of *select*, none of these parameters are mandatory. 
+The [import](../manual/3_Import.md) command uses a lot of parameters to return most appropriate images. *Select* accepts the archive name, *frame* cuts the scene to a given region, *period* selects the acquisition time, *quality* rejects images with more than the given partition of errors, *cover* rejects sources with less than the given coverage of the *frame*, *warp* and *pixel* change the projection and finally *factor* and *offset* transfer the result into calibrated values. Except of *select*, none of these parameters are mandatory. 
 
 -----
 
@@ -55,7 +55,7 @@ import
 
 ---
 
-The *home* process is necessary for each process chain (see [T1d]())
+The *home* process is necessary for each process chain (see [T1d: Initialize Imalys processes](1_Prepare))
 
 The *import* process *selects* four Landsat-8 OLI images, extracts them from the tar-archive, cuts them with *frame* to the extend of the *bounding-box.shp*, rejects images with less than 85% clear pixels (*quality*), rejects source images with less than 90% *coverage*, selects the six optical *bands* of the OLI sensor, calibrates the values to TOA reflectance (*factor, offset*), transforms (*warp*) the projection to WGS-84, UTM, zone 32 with 30 m *pixel* size and stacks the 6 optical bands to one image. 
 

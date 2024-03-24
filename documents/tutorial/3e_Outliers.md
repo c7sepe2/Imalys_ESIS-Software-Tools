@@ -1,6 +1,6 @@
 ### T3e	Outliers
 
-Outliers in time series are often also outliers in space, e.g., construction sites or forest fires. Outliers in space are easy to detect, especially if previously visible boundaries ([Zones]()) have been created. If possible, the analysis should always use both aspects.
+Outliers in time series are often also outliers in space, e.g., construction sites or forest fires. Outliers in space are easy to detect, especially if previously visible boundaries ([Zones](../manual/7_Zones.md)) have been created. If possible, the analysis should always use both aspects.
 
 ![](/home/c7sepe2/ESIS/GitHub_Documents/images/t3_Cycle-NDVI.png)
 

@@ -1,6 +1,6 @@
 ### T3b	Time series and change
 
-Image data from remote sensing are snapshots that show arbitrary differences. All tutorials above use a short time course to return “typical” image values for the given period (see [Median](). Sentinel 2 and Landsat 8 have been in operation since 2016 and 2014 respectively. Typically 1 to 3 usable images are available for three months. Landsat sensors (TM and OLI) allow time series over 40 years.
+Image data from remote sensing are snapshots that show arbitrary differences. All tutorials above use a short time course to return “typical” image values for the given period (see [Median](../manual/5_Reduce.md). Sentinel 2 and Landsat 8 have been in operation since 2016 and 2014 respectively. Typically 1 to 3 usable images are available for three months. Landsat sensors (TM and OLI) allow time series over 40 years.
 
 ![](../images/t3_Variance.png)
 
@@ -16,9 +16,7 @@ To analyze changes over a longer period *Imalys* provides the *difference*, *var
 
 → variance constant season = annual change
 
-Given a stack of at least three images the *variance* calculates the “variability” of each pixel using the Gaussian formulae. *Regression* quantifies a linear trend in time. Both processes calculate each pixel and each band individually. If no time stamp is provided by the [Import]() command, all images will be treated as of equal distance. Strictly speaking both formulae assume a normalized distribution of the values.
-
-→ 75% limit
+Given a stack of at least three images the *variance* calculates the “variability” of each pixel using the Gaussian formulae. *Regression* quantifies a linear trend in time. Both processes calculate each pixel and each band individually. If no time stamp is provided by the [Import](../manual/3_Import.md) command, all images will be treated as of equal distance. Strictly speaking both formulae assume a normalized distribution of the values.
 
 To reduce the statistical results for different bands to one value for each pixel, the *principal* or the *mean* process can be used.
 

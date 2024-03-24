@@ -6,9 +6,10 @@
 
 - Create a new directory *ESIS* at your home directory
 - Add the subdirectories *binaries*, *hooks*, *images*, *frames*, *results* and *tutorial* 
-- Download the binary files [x_Imalys]() and [r_Imalys]() to your *~/ESIS/binary* directory
-- Download and extract the image data [images.zip]() to your *~/ESIS/image* directory
-- Download and extract the image data [frames.zip]() to your *~/ESIS/frames* directory
+- Download the binary files [x_Imalys](../../binaries/README.md) and [r_Imalys](../../binaries/README.md) to your *~/ESIS/binary* directory
+- Download and extract the *imalys.zip* archive from [Zenodo]()
+- Copy the *image* directory of the archive to your *~/ESIS/image* directory
+- Copy the *frames* directory of the archive to your *~/ESIS/frames* directory
 - Download the [tutorial.pdf]() file to your *~/ESIS/tutorial* directory or work online
 
 If you prefer to install the tutorial to another directory, you will have to modify the path names at the examples.
@@ -17,11 +18,11 @@ If you prefer to install the tutorial to another directory, you will have to mod
 
 ### T1b	Install executable files
 
-All commands and processes of ***Imalys*** are combined into an executable program *x_Imalys*. *x_Imalys* does not need to be installed. It is sufficient to copy the files to your *usr/local/bin* directory. You will need administrative rights to copy them. *usr/local/bin* is not included into the package system.
+All commands and processes of ***Imalys*** are combined into an executable program *x_Imalys*. *x_Imalys* does not need to be installed. It is sufficient to copy [x_Imalys](../../binaries/x_Imalys) and [r_Imalys](../../binaries/r_Imalys) to your *usr/local/bin* directory. You will need administrative rights to copy them. The *usr/local/bin* directory is not included into the package system.
 
 ```
-sudo cp ~/ESIS/binaries/x_Imalys usr/local/bin
-sudo cp ~/ESIS/binaries/r_Imalys usr/local/bin
+sudo cp ~/downloads/x_Imalys usr/local/bin
+sudo cp ~/downloads/r_Imalys usr/local/bin
 ```
 
 If you prefer to install the executable files to a subdirectory of your */usr/local/bin* do not forget to extend your environment for the selected path.
@@ -32,7 +33,7 @@ Imalys uses the **GDAL library** of the [Open Source Geospatial Foundation](http
 
 ### T1c	Run executable files
 
-The executable files *x_Imalys* or *r_Imays* must be called as a command in a shell or terminal. *x_Imalys* must be called with one parameter containing the filename of the process chain (see [T1c]()). To repeat the process chain with varying parameters, *r_Imalys* must be called with the filename of the process chain and the variable list as parameters (see [T7]()). 
+The executable files *x_Imalys* or *r_Imays* must be called as a command in a shell or terminal. *x_Imalys* must be called with one parameter containing the filename of the process chain (see [T1c]()). To repeat the process chain with varying parameters, *r_Imalys* must be called with the filename of the process chain and the variable list as parameters (see [T7: Process Chain Variables](7a_Variables.md)). 
 
 ```
 x_Imalys »path_to_process-chain«

@@ -1,6 +1,6 @@
 ### T3d	Seasonal periods
 
-In mid-latitudes there are pronounced seasonal periods with changes often greater than the changes over years. On the one hand the seasonal changes themselves can be of interest (see [T3b]()).
+In mid-latitudes there are pronounced seasonal periods with changes often greater than the changes over years. On the one hand the seasonal changes themselves can be of interest (see [T3b: Time series and change](3b_TimeSeries.md)).
 
 In order to depict typical features, trends or outliers, the season of the images should be taken into account. For long time series images of the same season should be preferred. We got no problems to collect enough images for two 40 years time series of Germany, one based on images for May to July, the other for August to October. The results allow to map long and short time developments with the same datasets. An example for a 5 years period is depicted below.
 

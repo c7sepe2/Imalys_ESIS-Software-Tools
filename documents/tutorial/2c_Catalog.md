@@ -2,7 +2,7 @@
 
 *Imalys* can create a local image archives database to select images effectively. The database stores the acquisition date together with the center and the size of the archived image tiles. The database is formatted as point geometry to have a look at it using a GIS. 
 
-There is no need to call the [catalog]() in the same process chain as the [import](). The *catalog* must only be recalculated if the collection of archives has changed.
+There is no need to call the [catalog]() in the same process chain as the [import](../manual/3_Import.md). The *catalog* must only be recalculated if the collection of archives has changed.
 
 ```
 IMALYS [tutorial 2c]

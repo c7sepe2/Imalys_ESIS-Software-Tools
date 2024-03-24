@@ -10,7 +10,7 @@ Spatial patterns from different zones were reduced by a self-calibrating analysi
 
 -----
 
-The **objects size** is not limited. Simple patterns of small [zones]() can be repeated over a large area to form one large *object*. Large *zones* usually form *objects* of one dominant zone class and many smaller ligands. In practice the size of the *zones* should be selected in such a way that homogeneous *objects* are not reduced to many *zones*, whereas heterogeneous *objects* can be represented by a sufficient number of smaller *zones*.
+The **objects size** is not limited. Simple patterns of small [zones](../manual/7_Zones.md) can be repeated over a large area to form one large *object*. Large *zones* usually form *objects* of one dominant zone class and many smaller ligands. In practice the size of the *zones* should be selected in such a way that homogeneous *objects* are not reduced to many *zones*, whereas heterogeneous *objects* can be represented by a sufficient number of smaller *zones*.
 
 ```
 IMALYS [tutorial 5c]

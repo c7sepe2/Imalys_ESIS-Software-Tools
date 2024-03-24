@@ -33,7 +33,7 @@ export
 	target=/home/»user«/ESIS/results/Mapping.tif
 ```
 
-Tutorial 5b shows how to classify zones instead of pixels. The image input is taken from an earlier result. Alternatively all images stored at the working directory can be selected directly by [zones](). To classify zones with the [mapping]() command, the raster part (*index* and *index.hdr*) of the zones definition must be called. The classification result *mapping* can be exported as usual. Different classes are visualized by a color palette.
+Tutorial 5b shows how to classify zones instead of pixels. The image input is taken from an earlier result. Alternatively all images stored at the working directory can be selected directly by [zones](). To classify zones with the [mapping](../manual/9_Mapping.md) command, the raster part (*index* and *index.hdr*) of the zones definition must be called. The classification result *mapping* can be exported as usual. Different classes are visualized by a color palette.
 
 -----
 

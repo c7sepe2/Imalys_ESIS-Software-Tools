@@ -48,11 +48,11 @@ The results of tutorial 2d must be available at the working directory!
 
 ---
 
-Tutorial 3a demonstrates how to rearrange intermediate results to two different pixel indices. The [compile]() process must be repeated to select images of the first half of the vegetation period. The first [reduce]() creates an optimized 6 band image.
+Tutorial 3a demonstrates how to rearrange intermediate results to two different pixel indices. The [compile](../manual/4_Compile.md) process must be repeated to select images of the first half of the vegetation period. The first [reduce](../manual/5_Reduce.md) creates an optimized 6 band image.
 
-The second [reduce]() calculates the vegetation index *NDVI* and the plant metabolism index *NirV*. To calculate the indices, the position of the red and the near infrared bands within the image must be given as a number, starting with zero for the upmost layer (green). If the input images are identical, the [reduce]() commands can be concatenated. Two [export]() commands save the results as Geo-Tiff files in the *results* directory.
+The second [reduce](../manual/5_Reduce.md) calculates the vegetation index *NDVI* and the plant metabolism index *NirV*. To calculate the indices, the position of the red and the near infrared bands within the image must be given as a number, starting with zero for the upmost layer (green). If the input images are identical, the *reduce* commands can be concatenated. Two [export](../manual/11_Export.md) commands save the results as Geo-Tiff files in the *results* directory.
 
-Different months given under [compile]() and [export]() can create the same indices for the second half of the vegetation period 2022.
+Different months given under [compile](../manual/4_Compile.md) and [export](../manual/5_Export.md) can create the same indices for the second half of the vegetation period 2022.
 
 -----
 

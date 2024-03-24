@@ -32,7 +32,7 @@ import
 
 ---
 
-Tutorial 2d	uses an image [Catalog]() to import all example images. [Home]() clears the working directory, the archive selection is set to a acquisition date between May and October and an assured coverage (*distance=1*). The result images must be covered at least by 90% of each accepted image (*cover=0.9*), the cloud cover must be less than 15% (*quality=0.86*). Everything else is like tutorial 2b.
+Tutorial 2d	uses an image [Catalog](../manual/2_Catalog.md) to import all example images. [Home](../manual/1_Home.md) clears the working directory, the archive selection is set to a acquisition date between May and October and an assured coverage (*distance=1*). The result images must be covered at least by 90% of each accepted image (*cover=0.9*), the cloud cover must be less than 15% (*quality=0.86*). Everything else is like tutorial 2b.
 
 -----
 

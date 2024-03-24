@@ -1,6 +1,6 @@
 ### T2e	Select and reduce a short time course
 
-Time periods can be selected during the image [Import]() but as well with the [Compile]() command if imported images are available. The selection will only work if the acquisition time is part of the image filename.
+Time periods can be selected during the image [Import](../manual/3_Import.md) but as well with the [Compile](../manual/4_Compile.md) command if imported images are available. The selection will only work if the acquisition time is part of the image filename.
 
 ```
 IMALYS [tutorial 2e]
@@ -23,7 +23,7 @@ export
 
 The results of tutorial 2d must be available at the working directory!
 
-Tutorial 2e is nearly identical to tutorial 2b except the time period under [Compile]() and [Export](). The result of T2e is an 6 band image of the second half of the vegetation period of 2022. 
+Tutorial 2e is nearly identical to tutorial 2b except the time period under [Compile](../manual/4_Compile.md) and [Export](../manual/11_Export.md). The result of T2e is an 6 band image of the second half of the vegetation period of 2022. 
 
 ----
 
