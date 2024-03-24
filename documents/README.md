@@ -2,7 +2,7 @@
 
 The *Imalys* software library is documented in three forms:
 
-- a [tutorial](tutorial/README.md) that includes images, binaries, examples and hints how to use *Imalys*
+- a [tutorial](tutorial/Index.md) that includes images, binaries, examples and hints how to use *Imalys*
 
 - a [manual](manual/Index.md) with precise descriptions of all *Imalys* commands and parameters
 
