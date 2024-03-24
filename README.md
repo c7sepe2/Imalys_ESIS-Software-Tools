@@ -22,15 +22,15 @@ ___
 
 ### Get Started
 
-The easiest way to learn about *Imalys* is to run one of the [tutorials](documents/tutorial/README.md). Copy and extract the [tutorial archive](documents/tutorial/README.md) to a place where you have writing permissions and follow the description. The archive includes image data, process chains, binary files and a stepwise description how to use them. The only thing you have to add is the [GDAL library](https://github.com/OSGeo/GDAL).
+The easiest way to learn about *Imalys* is to run one of the [tutorials](documents/tutorial/Index.md). Copy and extract the [tutorial archive](documents/tutorial/README.md) to a place where you have writing permissions and follow the description. The archive includes image data, process chains, binary files and a stepwise description how to use them. The only thing you have to add is the [GDAL library](https://github.com/OSGeo/GDAL).
 
 ### Installation
 
-The *Imalys* [binary files](binaries/README.md) need no installation. They can be simply copied to your */usr/local/bin* directory. To run *Imalys* the GDAL library must be available under your */usr/bin/* directory. The GDAL library can be obtained from [GitHub](https://github.com/OSGeo/GDAL). If you run Quantum-Gis the library is already installed. For details please refer to our [manual](documents/README.md).
+The *Imalys* [binary files](binaries/README.md) need no installation. They can be simply copied to your */usr/local/bin* directory. To run *Imalys* the GDAL library must be available under your */usr/bin/* directory. The GDAL library can be obtained from [GitHub](https://github.com/OSGeo/GDAL). If you run Quantum-Gis the library is already installed. For details please refer to our [manual](documents/manual/Index.md).
 
 ### Usage
 
-*Imalys* must be called with a shell or terminal. All necessary commands and parameters are passed by a single text file. Installation, commands and parameters are described in depth in our [manual](documents/manual/Index.md). A [tutorial](documents/tutorial/README.md) provides examples of all processing steps and the combination of the *Imalys* tools. For expert users important algorithms are discussed in a [background](documents/background/README.md) document.
+*Imalys* must be called with a shell or terminal. All necessary commands and parameters are passed by a single text file. Installation, commands and parameters are described in depth in our [manual](documents/manual/Index.md). A [tutorial](documents/tutorial/Index.md) provides examples of all processing steps and the combination of the *Imalys* tools. For expert users important algorithms are discussed in a [background](documents/background/README.md) document.
 
 ### Changelog
 
