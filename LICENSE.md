@@ -11,22 +11,17 @@ The software library Imalys (Image Analysis) was developed to derive traits from
 **The code is a property of:**
 
 Helmholtz-Zentrum für Umweltforschung GmbH – UFZ
-
 Registered Office: Leipzig  
-
 Registration Office: Amtsgericht Leipzig  
-
 Trade Register Nr. B 4703  
-
 Chairman of the Supervisory Board: MinDirig'in Oda Keppler  
-
 Scientific Director: Prof. Dr. Georg Teutsch  
-
 Administrative Director: Dr. Sabine König  
 
 **Contact:**
 
-Peter Selsam (peter.selsam@ufz.de), Ronny Gey (ronny.gey@ufz.de)
+Peter Selsam (peter.selsam@ufz.de), 
+Ronny Gey (ronny.gey@ufz.de)
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
