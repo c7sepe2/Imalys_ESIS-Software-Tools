@@ -439,14 +439,13 @@ var
 begin
   Result:=Tools.FileFilter(sFlt); //Liste aus Maske
   for I:=pred(Result.Count) downto 0 do
-    if ExtractFileExt(Result[0])='.hdr'
-      then Result[I]:=ChangeFileExt(Result[I],'') //Bild statt Header
-      else Result.Delete(I); //nur Bilder
+    if ExtractFileExt(Result[I])='.hdr' then
+      Result[I]:=ChangeFileExt(Result[I],''); //Bild statt Header
   Tools.HintOut('Parse.Search: '+IntToStr(Result.Count)+' files');
 end;
 
-{ pEx ersetzt Variable im Format "$Ziffer" durch den Text nach dem "=" Zeichen.
-  pEx ersetzt jedes Vorkommen im übergebenen Text. pAs ignoriert Leerzeichen,
+{ pRp ersetzt Variable im Format "$Ziffer" durch den Text nach dem "=" Zeichen.
+  pRp ersetzt jedes Vorkommen im übergebenen Text. pRp ignoriert Leerzeichen,
   Tabs und dergl. nach dem Gleichheits-Zeichen.
   VARIABLE DÜRFEN NUR AUS ZWEI BUCHSTANEN (DOLLAR-ZEICHEN + ZIFFER) BESTEHEN }
 
@@ -486,6 +485,7 @@ begin
           copy(slPrc[C],iPst+2,$FF); //Variable einsetzen
         iPst:=pos('$',slPrc[C]); //nächste Variable
       end;
+      qS:=slPrc[C];
     end;
     slPrc.SaveToFile(eeHme+'commands'); //NUR KONTROLLE
   finally
@@ -754,6 +754,7 @@ var
   sTrg:string; //Ergebnis-Name (Vorgabe)
   sKey,sVal:string; //linke, rechte Hälfte der Parameter-Zeile
   I:integer;
+  qS:string;
 begin
   sTrg:=eeHme+cfCpl; //Vorgabe-Name
   try
@@ -772,20 +773,21 @@ begin
         Tools.ErrorOut(cKey+sKey);
     end;
     for I:=pred(slImg.Count) downto 0 do
+    begin
+      qS:=slImg[I];
       if FileExists(slImg[I])=False then
         slImg.Delete(I);
+    end;
     if slImg.Count=0 then Tools.ErrorOut(cImg); //keine Aufgabe
 
     slImg.Sort; //bei richtigen Namen nach Zeitangaben
     for I:=0 to pred(slImg.Count) do
-      if ExtractFileExt(slImg[I])<>''
-        then slImg[I]:=Image._Translate(bSgl,slImg[I]) //im ENVI-Format speichern
-        else slImg[I]:=Tools.CopyEnvi(slImg[I],eeHme+ExtractFileName(slImg[I]));
-
+      if ExtractFileExt(slImg[I])=''
+        then slImg[I]:=Tools.CopyEnvi(slImg[I],eeHme+ExtractFileName(slImg[I])) //kopieren
+        else slImg[I]:=Image._Translate(bSgl,slImg[I]); //im ENVI-Format speichern
     if slImg.Count>1
       then Image.StackImages(slImg,sTrg) //Stack aus Bilder-Liste im ENVI-Format
       else Tools.EnviRename(slImg[0],sTrg); //ein Bild umbenennen
-
     if length(sCrs)>0 then Header._Projection(sCrs,sTrg); //Projektion überschreiben
     if length(sFrm)>0 then Cover.ClipToFrame(sFrm,sTrg); //auf ROI zuschneiden
   finally
@@ -916,8 +918,8 @@ function tParse._Breaks(iLin:integer; slPrc:tStringList):integer;
 const
   cKey = 'pBk: Undefined parameter under "break": ';
 var
-  sExc:string=''; //Befehl
   sImg:string=''; //Vorbild
+  sCmd:string=''; //Befehl
   sKey,sVal:string; //linke, rechte Hälfte der Parameter-Zeile
   I:integer;
 begin
@@ -925,12 +927,13 @@ begin
   begin
     Result:=I; //aktuelle Zeile
     if not GetParam(slPrc[I],sKey,sVal) then break; //Parameter, Wert
-    if sKey='execute' then sExc:=sVal else
+    if sKey='execute' then sCmd:=(sVal) else //Befehl
     if sKey='select' then sImg:=wDir(sVal) else //Bilddaten (Zeitverlauf) für Statistik
       Tools.ErrorOut(cKey+sKey); //nicht definierte Eingabe
   end;
-  if sExc=cfHry then Reduce.xHistory(sImg) else
-  if sExc='equalize' then Rank.xEqualize(3,sImg);
+
+  if sCmd=cfHry then Reduce.xHistory(sImg) else
+  if sCmd='equalize' then Rank.xEqualize(2,sImg);
 end;
 
 end.

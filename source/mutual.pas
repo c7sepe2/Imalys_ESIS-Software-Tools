@@ -74,8 +74,11 @@ type
       function Correlation(fxVal:tn2Sgl):tn2Sgl;
       function Distribution(sImg,sRfz:string):tn3Sgl;
       function MaxCover(ixCmb:tn2Int; lsSpc:tFPList):tnInt;
+      procedure _MeanLine(faDns:tnSgl; iRds:integer);
       procedure Median(faDns:tnSgl; iRds:integer);
-      function Outlier(faDns:tnSgl):single;
+      function NormDiff(faDns:tnSgl):single;
+      function _Outlier(faDns:tnSgl; iRds:integer):single;
+      function __Outlier(faDns:tnSgl; fLmt:single):single;
       procedure Remap(iaLnk:tnInt; sMap:string);
       procedure ReportOut(lsSpc:tFPList);
       procedure _SortByte_(iMap:integer; ixMap:tn2Byt);
@@ -1647,7 +1650,7 @@ end;
   Abweichung und Mittelwert zurück. Ausreißer und Veränderungen werden mit
   hohen Werten abgebildet. }
 
-function tRank.Outlier(
+function tRank.NormDiff(
   faDns:tnSgl): //Werte-Reihe
   single; //Abweichung/Helligkeit
 // Varianz = (∑x²-(∑x)²/n)/(n-1)
@@ -1729,7 +1732,7 @@ begin
       inc(iCnt);
     end;
     Reduce.QuickSort(faPrt,iCnt); //ordnen
-    faDns[I]:=faPrt[trunc(iCnt/2)] //median
+    faDns[I]:=faPrt[trunc(iCnt/2)] //Median
   end;
 end;
 
@@ -1742,6 +1745,8 @@ procedure tRank.xEqualize(
   iRds:integer; //Fang-Radius
   sImg:string); //Vorbild
 const
+  //cLmt = 0.3;
+  cLmt = 5;
   cStk = 'rSg: The time course must contain at least tree layers: ';
 var
   fNan:single=NaN; //NoData
@@ -1763,22 +1768,122 @@ begin
       if isNan(fxStk[0,Y,X]) then continue;
       for S:=0 to pred(rHdr.Stk) do
         faDns[S]:=fxStk[S,Y,X]; //Zeit-Array aus einem Pixel
-      fxOtl[Y,X]:=Outlier(faDns); //normalisierte Abweichung
-      Median(faDns,iRds); //outlier entfernen
+      //fxOtl[Y,X]:=NormDiff(faDns); //normalisierte Abweichung
+      //Median(faDns,iRds); //outlier entfernen
       //ChainLine(faDns,iRds); //LowPass
+      //fxOtl[Y,X]:=_Outlier(faDns,iRds); //"Outlier" UND "Stack" füllen
+      //_MeanLine(faDns,iRds); //Mittelwerte
+      fxOtl[Y,X]:=__Outlier(faDns,cLmt);
+// Schwellen scheinen nie zu funktionieren
       for S:=0 to pred(rHdr.Stk) do
         fxStk[S,Y,X]:=faDns[S]; //Ausgleich als Bild
     end;
-{ TODO: RECENT:
-   → "Outlier" findet übersichtlich Ereignisse und Störungen
-   → Schwellen für Ausreißer scheinen grundsätzlich nicht brauchbar
-   → ChainLine dämpft sehr stark, reagiert aber auf Ausreißer
-   → Median hat mit RGB gut funktioniert }
   Image.WriteMulti(fxStk,eeHme+'equalize');
   Header.WriteMulti(rHdr,rHdr.aBnd,eeHme+'equalize');
   Image.WriteBand(fxOtl,-1,eeHme+'outlier');
   Header.WriteScalar(rHdr,eeHme+'outlier');
   Header.Clear(rHdr);
+end;
+
+{ rOl ersetzt die Zeitreihe "faDns" durch die Abweichung des Punkts "I" vom
+  Mittelwert der Werte "I-iRds" bis "I+iRds". Gleichzeitig gibt rOl als
+  Funktions-Wert die maximale Abweichung in der Zeitreihe zurück. }
+
+function tRank._Outlier(
+  faDns:tnSgl; //Zeitreihe
+  iRds:integer): //Fang-Radius > 1!
+  single; //höchste Abweichung
+// Varianz = (∑x²-(∑x)²/n)/(n-1)
+const
+  cTms = sqrt(2);
+var
+  faTmp:tnSgl=nil; //Zwischenlager
+  fSqr,fSum:double; //Zwischenlager
+  iCnt:integer; //gültige Pixel im Intervall
+  I,R:integer;
+begin
+  Result:=0;
+  SetLength(faTmp,length(faDns));
+  move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Backup
+  for I:=0 to high(faDns) do
+  begin
+    fSqr:=0; fSum:=0; iCnt:=0;
+    for R:=I-iRds to I+iRds do
+    begin
+      if (R<0) or (R>high(faDns)) then continue;
+      fSqr+=sqr(faTmp[R]);
+      fSum+=faTmp[R];
+      inc(iCnt)
+    end;
+    if iCnt>1 then
+      faDns[I]:=sqrt(max((fSqr-sqr(fSum)/iCnt)/pred(iCnt),0))
+    else faDns[I]:=0;
+    Result:=max(faDns[I],Result) //nur Maximum
+  end;
+end;
+
+// arithmetisch mitteln
+
+procedure tRank._MeanLine(
+  faDns:tnSgl; //Zeitreihe
+  iRds:integer); //Fang-Radius
+const
+  cTms = sqrt(2);
+var
+  faTmp:tnSgl=nil; //Zwischenlager
+  fSum:single; //Summe Werte
+  iCnt:integer; //Anzahl Werte
+  I,R:integer;
+begin
+  SetLength(faTmp,length(faDns));
+  move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Backup
+  for I:=0 to high(faDns) do
+  begin
+    fSum:=0; iCnt:=0; //Vorgabe
+    for R:=I-iRds to I+iRds do
+    begin
+      if (R<0) or (R>high(faDns)) then continue;
+      fSum+=faTmp[R]; //Summe gewichtete Werte
+      inc(iCnt) //gültige Punkte
+    end;
+    if iCnt>0 then
+      faDns[I]:=fSum/iCnt
+    else faDns[I]:=0;
+  end;
+end;
+
+// isolierte Outlier entfernen
+
+function tRank.__Outlier(
+  faDns:tnSgl; //Zeitreihe
+  fLmt:single): //Schwelle für normaisierte Abweichung
+  single; //Abweichung
+// Varianz = (∑x²-(∑x)²/n)/(n-1)
+var
+  faTmp:tnSgl=nil; //Zwischenlager
+  fSqr:double=0; //Quadratsumme Werte
+  fSum:double=0; //Summe Werte
+  I,R:integer;
+begin
+  SetLength(faTmp,length(faDns));
+  move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Backup
+
+
+  for I:=0 to high(faDns) do
+  begin
+    fSqr+=sqr(faTmp[I]);
+    fSum+=faTmp[I];
+  end;
+  Result:=sqrt(max((fSqr-sqr(fSum)/length(faDns))/high(faDns),0)); //Abweichung(Rundungsfehler!)
+
+
+  if abs(faTmp[0]-Result)>Result*fLmt then
+    faDns[I]:=(faTmp[1]); //ersetzen
+  for I:=1 to length(faDns)-2 do
+    if abs(faTmp[I]-Result)>Result*fLmt then
+      faDns[I]:=(faTmp[pred(I)]+faTmp[succ(I)])/2; //interpolieren
+  if abs(faTmp[high(faDns)]-Result)>Result*fLmt then
+    faDns[high(faDns)]:=(faTmp[length(faDns)-2]); //ersetzen
 end;
 
 initialization
@@ -1797,876 +1902,4 @@ finalization
 end.
 
 {==============================================================================}
-
-// Reihe ausgleichen
-// Endpunkte bleiben bestehen
-// neue Werte im Schwerpunkt der besehenden
-// Abstand wirkt quadratisch
-
-function tRank._Equalize(faDns:tnSgl):tnSgl;
-var
-  fLow,fHig:single; //Distanz-Faktoren
-  S:integer;
-begin
-  SetLength(Result,length(faDns));
-  move(faDns[0],Result[0],length(faDns)*SizeOf(single)); //Kopie als Vorlage
-  for S:=1 to length(faDns)-2 do
-  begin
-//------------------------------------------------------------------------------
-    {fxStk[S,Y,X]:=faDns[pred(S)]/4 + faDns[S]/2 + faDns[succ(S)]/4;}
-//------------------------------------------------------------------------------
-    fLow:=sqr(faDns[pred(S)]-faDns[S]); //sqr<>abs
-    fHig:=sqr(faDns[S]-faDns[succ(S)]); //sqr<>abs
-    Result[S]:=(faDns[pred(S)]*fHig/(fLow+fHig)+faDns[S]+
-      faDns[succ(S)]*fLow/(fLow+fHig))/2;
-//------------------------------------------------------------------------------
-  end;
-end;
-
-// Werte-Reihe ausgleichen
-// Basis: arithmetisches Mittel
-// Intervall frei wählbar
-// Am Rand kürzeres Intervall
-
-procedure tRank._Equalize(
-  faDns:tnSgl; //Werte-Reihe
-  iRds:integer); //Fangradius
-var
-  faTmp:tnSgl=nil; //Arbeitskopie von "faDns"
-  iCnt:integer; //gültige Punkte in Periode
-  R,S,T:integer;
-begin
-  SetLength(faTmp,length(faDns));
-  for R:=1 to iRds do
-  begin
-    move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Vorlage
-    FillDWord(faDns[0],length(faDns),0); //Vorgabe
-    for S:=0 to high(faDns) do
-    begin
-      iCnt:=0;
-      for T:=S-iRds to S+iRds do
-      begin
-        if (T<0) or (T>high(faDns)) then continue;
-        faDns[S]+=faTmp[T];
-        inc(iCnt)
-      end;
-      if iCnt>0 then
-        faDns[S]/=iCnt;
-    end;
-  end;
-end;
-
-// Werte-Reihe ausgleichen
-// immer drei Punkte
-// Endpunkte bleiben bestehen
-// Basis: gewichteter Mittelwert
-// Gewicht: Distanz wirkt invers quadratisch
-// Wiederholungen möglich
-
-procedure tRank._Equalize_Sqr(
-  faDns:tnSgl;
-  iRpt:integer);
-var
-  faTmp:tnSgl=nil; //Arbeitskopie von "faDns"
-  fLow,fHig:single; //Distanz-Faktoren
-  R,S:integer;
-begin
-  SetLength(faTmp,length(faDns));
-  for R:=1 to iRpt do
-  begin
-    move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Vorlage
-    for S:=1 to length(faDns)-2 do
-    begin
-      fLow:=sqr(faTmp[pred(S)]-faTmp[S]); //sqr<>abs
-      fHig:=sqr(faTmp[S]-faTmp[succ(S)]); //sqr<>abs
-      if (fLow=0) and (fHig=0) then continue;
-      faDns[S]:=(faTmp[pred(S)]*fHig/(fLow+fHig)+faTmp[S]+
-        faTmp[succ(S)]*fLow/(fLow+fHig))/2
-    end;
-  end;
-end;
-
-// Zeitverlauf stark dämpfen
-// NoData von Kanal 1 muss für alle Kanäle gelten
-
-procedure tRank._xEqualize(sImg,sOut:string); //Vorbild
-const
-  cStk = 'rSg: The time course must contain at least tree layers: ';
-var
-  fLow,fHig:single; //Distanz-Faktoren
-  faDns:tnSgl=nil; //Werte für einen Pixel
-  fxStk:tn3Sgl=nil; //Stack aus Zeitpunkten
-  rHdr:trHdr; //Metadata
-  S,X,Y:integer;
-begin
-  rHdr:=Header.Read(sImg);
-  if rHdr.Stk<3 then Tools.ErrorOut(cStk+sImg);
-  faDns:=Tools.InitSingle(rHdr.Stk,0); //ein Pixel, alle Zeitpunkte
-  fxStk:=Image.Read(rHdr,sImg); //Stack aus Zeitpunkten
-  //iHig:=pred(rHdr.Stk); //für Ausgleich
-
-  for Y:=0 to pred(rHdr.Lin) do
-    for X:=0 to pred(rHdr.Scn) do
-    begin
-      //Zeitreihe für einen Pixel kopieren
-      if isNan(fxStk[0,Y,X]) then continue;
-      for S:=0 to pred(rHdr.Stk) do
-        faDns[S]:=fxStk[S,Y,X];
-
-      //Zeitreihe dämpfen
-      {fxStk[0,Y,X]:=faDns[0]/2 + faDns[1]/2; //Mittelwert}
-      for S:=1 to rHdr.Stk-2 do
-      begin
-//------------------------------------------------------------------------------
-        {fxStk[S,Y,X]:=faDns[pred(S)]/4 + faDns[S]/2 + faDns[succ(S)]/4;}
-//------------------------------------------------------------------------------
-        fLow:=sqr(faDns[pred(S)]-faDns[S]); //sqr<>abs
-        fHig:=sqr(faDns[S]-faDns[succ(S)]); //sqr<>abs
-        fxStk[S,Y,X]:=(faDns[pred(S)]*fHig/(fLow+fHig)+faDns[S]+
-          faDns[succ(S)]*fLow/(fLow+fHig))/2;
-//------------------------------------------------------------------------------
-      end;
-      {fxStk[iHig,Y,X]:=faDns[pred(iHig)]/2 + faDns[iHig]/2; //Mittelwert}
-    end;
-  Image.WriteMulti(fxStk,sOut);
-  Header.WriteMulti(rHdr,rHdr.aBnd,sOut);
-  Header.Clear(rHdr);
-end;
-
-// Zeitverlauf stark dämpfen
-// NoData von Kanal 1 muss für alle Kanäle gelten
-
-procedure tRank.__xEqualize(
-  iRpt:integer; //wiederholungen
-  sImg:string; //Vorbild
-  sOut:string); //Ergebns
-const
-  cStk = 'rSg: The time course must contain at least tree layers: ';
-var
-  faDns:tnSgl=nil; //Werte für einen Pixel
-  fxStk:tn3Sgl=nil; //Stack aus Zeitpunkten
-  rHdr:trHdr; //Metadata
-  S,X,Y:integer;
-begin
-  rHdr:=Header.Read(sImg);
-  if rHdr.Stk<3 then Tools.ErrorOut(cStk+sImg);
-  faDns:=Tools.InitSingle(rHdr.Stk,0); //ein Pixel, alle Zeitpunkte
-  fxStk:=Image.Read(rHdr,sImg); //Stack aus Zeitpunkten
-  //iHig:=pred(rHdr.Stk); //für Ausgleich
-
-  for Y:=0 to pred(rHdr.Lin) do
-    for X:=0 to pred(rHdr.Scn) do
-    begin
-      //Zeitreihe für einen Pixel kopieren
-      if isNan(fxStk[0,Y,X]) then continue;
-      for S:=0 to pred(rHdr.Stk) do
-        faDns[S]:=fxStk[S,Y,X];
-      _Equalize(faDns,iRpt); //glätten mit "iRpt" Wiederholungen
-      for S:=0 to pred(rHdr.Stk) do
-        fxStk[S,Y,X]:=faDns[S];
-    end;
-  Image.WriteMulti(fxStk,sOut);
-  Header.WriteMulti(rHdr,rHdr.aBnd,sOut);
-  Header.Clear(rHdr);
-end;
-
-{ rOl gibt die größte Differenz zwischen einem Messpunkt und dem Mittelwert
-  zurück. rOl unterstelt, dass alle übergebenen Layer eine Zeitreihe bilden.
-  rOl bestimmt für jeden Bildpixel Mittelwert und Abweichung und übernimmt die
-  größte Differenz zum Mittwelwert als Ergebnis }
-{ ==> Outlier könnten entfernt werden
-  ==> Outlier könnten als Differenz aufeinander folgender Differenzen schärfer werden
-  ==> die Suche könnte Wiederholungen benötigen
-  ==> hohe CoVarianz müsste lineare Trends anzeigen
-  ==> kleine Varianz müsste konstante Perioden anzeigen
-  ==> Sprünge könnten mit den Differenzen zwischen zwei Werten gesucht werden,
-      wenn die Outlier entfernt sind. Für Sprünge sollten die Differenzen aller
-      Kanäle getrennt erfasst werden um Farbänderungen zu finden. }
-
-procedure tRank.xOutlier(sImg:string);
-var
-  fDvt,fMea:double; //Statistik
-  fNan:single=NaN; //NoData als Variable
-  fSqr,fSum:double; //Zwischenlager: Quadrat, Summe
-  fxRes:tn2Sgl=nil; //Ergebnis-Kanal = Hauptkomponente aus einem Bild
-  fxStk:tn3Sgl=nil; //Vorbild = Stack, multispektral
-  iCnt:integer; //Zähler Zeitpunkte
-  pVal:^single; //ausgewählter Pixel
-  rHdr:trHdr; //Metadata
-  I,X,Y:integer;
-begin
-  rHdr:=Header.Read(sImg);
-  fxRes:=Tools.Init2Single(rHdr.Lin,rHdr.Scn,dWord(fNan)); //Vorgabe = ungültig
-  fxStk:=Image.Read(rHdr,sImg); //Bild mit 1 Kanal pro Zeitpunkt
-
-  for Y:=0 to pred(rHdr.Lin) do
-    for X:=0 to pred(rHdr.Scn) do
-    begin
-      fSqr:=0; fSum:=0; iCnt:=0; //Vorgaben
-      for I:=0 to high(fxStk) do
-      begin
-        pVal:=@fxStk[I,Y,X]; //Vorbild-Pixel
-        if isNan(pVal^) then continue;
-        fSqr+=sqr(pVal^); //Zwischenlager
-        fSum+=pVal^;
-        inc(iCnt) //Zähler
-      end;
-      if iCnt<2 then continue;
-
-      fDvt:=sqrt((fSqr-sqr(fSum)/iCnt)/pred(iCnt)); //Abweichung
-      fMea:=fSum/iCnt; //Mittelwert
-      pVal:=@fxRes[Y,X]; //Ergebnis-Pixel
-      if fDvt>0 then
-      begin
-        pVal^:=fxStk[0,Y,X]; //Vorgabe wg. NoData
-        for I:=1 to high(fxStk) do
-          pVal^:=max(abs(fxStk[I,Y,X]-fMea)/fDvt,pVal^) //höchste Abweichung
-      end;
-      fxRes[Y,X]:=pVal^;
-    end;
-  Image.WriteBand(fxRes,-1,eeHme+'outlier');
-  Header.WriteScalar(rHdr,eeHme+'outlier');
-  Header.Clear(rHdr);
-end;
-
-{ rSg sucht nach konstanten Perioden in der Zeitreihe. Zu Beginn teilt rSg die
-  Zeitreihe in gleich große Perioden auf und bestimmt die gemeinsame Varianz
-  von jeweils zwei Nachbar-Perioden. Dabei bilden sich lokale Minima. rSg
-  vereinigt die Nachbar-Perioden an lokalen Minima und wiederholt den Prozess.
-  Die Perioden wachsen bis eine Schwelle erreicht wird. rSg gibt die Anzahl der
-  gebildeten Perioden zurück. }
-{ rSg unterstellt, dass die übergebenen Bilddaten "sImg" eine fortlaufende und
-  homogene Zeitreihe bilden. Als Schwelle für Perioden verwendet rSg
-  Varianz der gesamten Zeitreihe mit einem wählbaren Faktor. }
-{ in "raPrd.Prv|Nxt" ist die Varianz der aktuellen und der vorherigen|nächsten
-  Periode gespeichert. "raPrd.Low|Hig" enthalten die Grenzen der aktuellen
-  Periode. }
-
-{ ==> Varianz als Schwelle scheint wenig geeignet. Das Ergebns gibt keine
-      Landschafts-Strukturen wieder. Die Varianz ist nicht von der Zeit
-      abhängig.
-  ==> CoVarianz und konstante Schwelle verwenden. Längste Periode zurückgeben.
-      RGB für drei längste Perioden? Bit-Code für periodische Abschnitte? }
-
-procedure tRank._x1Segments_(
-  fFct:single; //Faktor für Varianz
-  sImg:string); //Vorbild
-var
-  fLmt:single; //Maximum Varianz für Vereinigung
-  fNan:single=NaN; //NoData
-  faDns:tnSgl=nil; //Werte für einen Pixel
-  fxStk:tn3Sgl=nil; //Stack aus Zeitpunkten
-  fxVrz:tn2Sgl=nil; //Varianz aller Layer
-  iDrp:integer; //Zwischenlager für nPrd
-  fxPrd:tn2Sgl=nil; //Anzahl Perioden
-  nPrd:integer; //Anzahl Perioden
-  raPrd:tra_Prd=nil; //stabile Perioden im Zeitverlauf
-  rHdr:trHdr; //Metadata
-  S,T,X,Y:integer;
-begin
-  rHdr:=Header.Read(sImg);
-  fxStk:=Image.Read(rHdr,sImg); //Stack aus Zeitpunkten
-  SetLength(raPrd,rHdr.Stk); //alle Zeitpunkte als Periode
-  fxPrd:=Tools.Init2Single(rHdr.Lin,rHdr.Scn,dWord(fNan)); //KONTROLLE: Anzahl Perioden
-  fxVrz:=Reduce.Variance(fxStk); //Varianz aller Kanäle
-
-  for Y:=0 to pred(rHdr.Lin) do
-    for X:=0 to pred(rHdr.Scn) do
-    begin
-      //Zeitreihe für einen Pixel, alle Kanäle
-      faDns:=Tools.InitSingle(rHdr.Stk,dWord(fNan)); //ein Pixel, alle Zeitpunkte
-      for S:=0 to pred(rHdr.Stk) do
-        faDns[S]:=fxStk[S,Y,X]; //Werte für einen Pixel
-      fLmt:=fxVrz[Y,X]*fFct; //Maximum Abwechung (als Varianz)
-
-      //Vorbereitung: Intervall, keine Richtung
-      for S:=0 to pred(rHdr.Stk) do
-      begin
-        raPrd[S].Low:=S;
-        raPrd[S].Hig:=S;
-        raPrd[S].Prv:=MaxSingle;
-        raPrd[S].Nxt:=MaxSingle;
-      end;
-      for S:=1 to pred(rHdr.Stk) do
-        SectVariance(faDns,@raPrd[pred(S)],@raPrd[S]); //Paare bewerten
-
-      //lokale Minima ausdehnen
-      nPrd:=rHdr.Stk;
-      repeat
-        iDrp:=nPrd; //Perioden vor der Prüfung
-        for S:=pred(nPrd) downto 1 do
-          if (raPrd[pred(S)].Prv>raPrd[pred(S)].Nxt) and
-             (raPrd[S].Prv<raPrd[S].Nxt) and //lokales Minimum
-             (raPrd[S].Prv<=fLmt) then //Schwelle eingehalten
-          begin
-            raPrd[pred(S)].Hig:=raPrd[S].Hig; //Periode erweitern
-            for T:=S to nPrd-2 do //restliche Perioden ..
-              raPrd[T]:=raPrd[succ(T)]; //.. verschieben
-            dec(nPrd);
-
-            //neue Kontakte vorbelegen
-            if S>1 then raPrd[S-2].Nxt:=MaxSingle;
-            raPrd[pred(S)].Prv:=MaxSingle;
-            raPrd[pred(S)].Nxt:=MaxSingle;
-            if S<nPrd then raPrd[S].Prv:=MaxSingle;
-
-            //Varianz neu bestimmen
-            if S>1 then SectVariance(faDns,@raPrd[S-2],@raPrd[pred(S)]); //Intervall bewerten
-            if S<nPrd then SectVariance(faDns,@raPrd[pred(S)],@raPrd[S]); //Intervall bewerten
-          end;
-      until nPrd=iDrp; //keine Veränderung
-
-      //längstes Intervall NUR KONTROLLE
-      iDrp:=raPrd[0].Hig-raPrd[0].Low;
-      for S:=1 to pred(nPrd) do
-        iDrp:=max(raPrd[S].Hig-raPrd[S].Low,iDrp);
-      fxPrd[Y,X]:=succ(iDrp); //längstes Intervall NUR KONTROLLE
-    end;
-  Image.WriteBand(fxPrd,-1,eeHme+'segments');
-  Header.WriteScalar(rHdr,eeHme+'segments');
-  Header.Clear(rHdr);
-end;
-
-{ rSg sucht nach konstanten Perioden in der Zeitreihe. Zu Beginn teilt rSg die
-  Zeitreihe in gleich große Perioden auf und bestimmt die gemeinsame CoVarianz
-  von jeweils zwei Nachbar-Perioden. Dabei bilden die sich lokale Maxima der
-  Beträge. rSg vereinigt die Nachbar-Perioden an lokalen Maxima und wiederholt
-  den Prozess. Die Perioden wachsen bis eine Schwelle erreicht wird. rSg gibt
-  die längste Periode als Wert zurück. }
-{ rSg unterstellt, dass die übergebenen Bilddaten "sImg" eine fortlaufende und
-  homogene Zeitreihe bilden. }
-{ in "raPrd.Prv|Nxt" ist die CoVarianz der aktuellen mit der jeweils vorherigen
-  bzw. nächsten Periode gespeichert. "raPrd.Low|Hig" enthält die Grenzen der
-  aktuellen Periode. }
-
-{ ==> Bit-Code für periodische Abschnitte? }
-
-procedure tRank._x2Segments_(
-  fLmt:single; //Faktor für Varianz
-  sImg:string); //Vorbild
-var
-  fNan:single=NaN; //NoData
-  faDns:tnSgl=nil; //Werte für einen Pixel
-  fxStk:tn3Sgl=nil; //Stack aus Zeitpunkten
-  iDrp:integer; //Zwischenlager für nPrd
-  fxPrd:tn2Sgl=nil; //Anzahl Perioden
-  nPrd:integer; //Anzahl Perioden
-  raPrd:tra_Prd=nil; //stabile Perioden im Zeitverlauf
-  rHdr:trHdr; //Metadata
-  S,T,X,Y:integer;
-begin
-  rHdr:=Header.Read(sImg);
-  fxStk:=Image.Read(rHdr,sImg); //Stack aus Zeitpunkten
-  SetLength(raPrd,rHdr.Stk); //alle Zeitpunkte als Periode
-  fxPrd:=Tools.Init2Single(rHdr.Lin,rHdr.Scn,dWord(fNan)); //KONTROLLE: Anzahl Perioden
-
-  for Y:=0 to pred(rHdr.Lin) do
-    for X:=0 to pred(rHdr.Scn) do
-    begin
-      //Zeitreihe für einen Pixel, alle Kanäle
-      faDns:=Tools.InitSingle(rHdr.Stk,dWord(fNan)); //ein Pixel, alle Zeitpunkte
-      for S:=0 to pred(rHdr.Stk) do
-        faDns[S]:=fxStk[S,Y,X]; //Werte für einen Pixel
-
-      //Vorbereitung: Intervall, keine Richtung
-      for S:=0 to pred(rHdr.Stk) do
-      begin
-        raPrd[S].Low:=S;
-        raPrd[S].Hig:=S;
-        raPrd[S].Prv:=0;
-        raPrd[S].Nxt:=0;
-      end;
-      for S:=1 to pred(rHdr.Stk) do
-        _SgCoVariance(faDns,@raPrd[pred(S)],@raPrd[S]); //Paare bewerten
-
-      //lokale Minima ausdehnen
-      nPrd:=rHdr.Stk;
-      repeat
-        iDrp:=nPrd; //Perioden vor der Prüfung
-        for S:=pred(nPrd) downto 1 do
-          if (abs(raPrd[pred(S)].Prv)<abs(raPrd[pred(S)].Nxt)) and
-             (abs(raPrd[S].Prv)>abs(raPrd[S].Nxt)) and //lokales Minimum
-             (abs(raPrd[S].Prv)>=fLmt) then //Schwelle eingehalten
-          begin
-            raPrd[pred(S)].Hig:=raPrd[S].Hig; //Periode erweitern
-            for T:=S to nPrd-2 do //restliche Perioden ..
-              raPrd[T]:=raPrd[succ(T)]; //.. verschieben
-            dec(nPrd);
-
-            //neue Kontakte vorbelegen
-            if S>1 then raPrd[S-2].Nxt:=0;
-            raPrd[pred(S)].Prv:=0;
-            raPrd[pred(S)].Nxt:=0;
-            if S<nPrd then raPrd[S].Prv:=0;
-
-            //Varianz neu bestimmen
-            if S>1 then _SgCoVariance(faDns,@raPrd[S-2],@raPrd[pred(S)]); //Intervall bewerten
-            if S<nPrd then _SgCoVariance(faDns,@raPrd[pred(S)],@raPrd[S]); //Intervall bewerten
-          end;
-      until nPrd=iDrp; //keine Veränderung
-
-      //längstes Intervall NUR KONTROLLE
-      {iDrp:=raPrd[0].Hig-raPrd[0].Low;
-      for S:=1 to pred(nPrd) do
-        iDrp:=max(raPrd[S].Hig-raPrd[S].Low,iDrp);
-      fxPrd[Y,X]:=succ(iDrp); //längstes Intervall NUR KONTROLLE}
-
-      //Dichte der Intervalle
-      fxPrd[Y,X]:=nPrd/rHdr.Stk; //Intervall-Dichte NUR KONTROLLE
-    end;
-  Image.WriteBand(fxPrd,-1,eeHme+'segments');
-  Header.WriteScalar(rHdr,eeHme+'segments');
-  Header.Clear(rHdr);
-end;
-
-{ rSg sucht nach konstanten Perioden in der Zeitreihe. Zu Beginn teilt rSg die
-  Zeitreihe in gleich große Perioden auf und bestimmt die gemeinsame CoVarianz
-  von jeweils zwei Nachbar-Perioden. Dabei bilden die sich lokale Maxima der
-  Beträge. rSg vereinigt die Nachbar-Perioden an lokalen Maxima und wiederholt
-  den Prozess. Die Perioden wachsen bis eine Schwelle erreicht wird. rSg gibt
-  die längste Periode als Wert zurück. }
-{ rSg unterstellt, dass die übergebenen Bilddaten "sImg" eine fortlaufende und
-  homogene Zeitreihe bilden. }
-{ in "raPrd.Prv|Nxt" ist die CoVarianz der aktuellen mit der jeweils vorherigen
-  bzw. nächsten Periode gespeichert. "raPrd.Low|Hig" enthält die Grenzen der
-  aktuellen Periode. }
-
-{ ==> CoVarianz für 3-Punkt-Intervalle verwenden
-       → jedes Intervall getrennt rechnen
-       → die Intervalle überlappen sich!
-       → Schwelle anwenden
-       → wenn bei zwei aufeinander folgenden Intervallen die Richtung stimmt,
-         dann Intervalle vereinigen
-       → Werte auf mittlere Helligkeit normalisieren
-  ==> Bit-Code für periodische Abschnitte?
-
-  ==> Daten sind zu stark verrauscht
-  ==> Zeitreihen stark dämpfen (Kettenlinie)
-  ==> Ausreißer dann leicht erkennbar
-  ==> Umkehrpunkte als Perioden-Trenner?}
-
-procedure tRank._x3Segments_(
-  fLmt:single; //Faktor für Varianz
-  sImg:string); //Vorbild
-const
-  cStk = 'rSg: The time course must contain at least tree layers: ';
-var
-  fNan:single=NaN; //NoData
-  faCov:tnSgl=nil; //CoVarianz ür 3-Punkt-Intervalle
-  faDns:tnSgl=nil; //Werte für einen Pixel
-  faMed:tnSgl=nil; //Mittelwert ür 3-Punkt-Intervalle
-  fxPrd:tn2Sgl=nil; //Anzahl Perioden
-  fxStk:tn3Sgl=nil; //Stack aus Zeitpunkten
-  iaPrd:tnInt=nil; //Perioden-IDs als Array
-  rHdr:trHdr; //Metadata
-  S,X,Y:integer;
-begin
-  rHdr:=Header.Read(sImg);
-  if rHdr.Stk<3 then Tools.ErrorOut(cStk+sImg);
-  faCov:=Tools.InitSingle(rHdr.Stk,0); //CoVarianz für 3-Punkt-Intervalle
-  faMed:=Tools.InitSingle(rHdr.Stk,0); //Mittelwert für 3-Punkt-Intervalle
-  fxPrd:=Tools.Init2Single(rHdr.Lin,rHdr.Scn,dWord(fNan)); //Anzahl Perioden KONTROLLE
-  fxStk:=Image.Read(rHdr,sImg); //Stack aus Zeitpunkten
-  iaPrd:=Tools.InitInteger(rHdr.Stk,0); //Perioden-IDs
-
-  for Y:=0 to pred(rHdr.Lin) do
-    for X:=0 to pred(rHdr.Scn) do
-    begin
-      //Zeitreihe für einen Pixel, alle Kanäle
-      faDns:=Tools.InitSingle(rHdr.Stk,dWord(fNan)); //ein Pixel, alle Zeitpunkte
-      for S:=0 to pred(rHdr.Stk) do
-        faDns[S]:=fxStk[S,Y,X]; //Werte für einen Pixel
-
-      //CoVarianz für 3-Punkte-Intervall
-      for S:=1 to rHdr.Stk-2 do
-      begin
-        faCov[S]:=_CovPeriod(faDns,pred(S),succ(S)); //Paare bewerten
-        faMed[S]:=(faDns[pred(S)]+faDns[S]+faDns[succ(S)])/3; //Mittelwert
-      end;
-
-      //Perioden suchen
-      iaPrd[1]:=1; //erstes Intervall
-      for S:=2 to rHdr.Stk-2 do
-        if abs(faCov[pred(S)]/faMed[pred(S)]+faCov[S]/faMed[S])>fLmt //Schwelle?
-          then iaPrd[S]:=iaPrd[pred(S)] //gleiches Intervall
-          else iaPrd[S]:=succ(iaPrd[pred(S)]); //neues Intervall
-
-      fxPrd[Y,X]:=iaPrd[S]; //Anzahl Intervalle NUR KONTROLLE
-    end;
-  Image.WriteBand(fxPrd,-1,eeHme+'segments');
-  Header.WriteScalar(rHdr,eeHme+'segments');
-  Header.Clear(rHdr);
-end;
-
-{ rTT erzeugt ein multispektrales Bild der Textur in der Zeit. Dazu läd rTT
-  immer denselben Kanal aus allen übergebenen Bildern (Zeitreihe) und bestimmt
-  die erste Hauptkomponente aller Pixel in der Zeit. rTT ignoriert NoData Pixel
-  in allen Kanälen und Zeiten. }
-
-procedure tRank._xTime_Texture_(sImg:string);
-const
-  cPrd = 'rTT: Bands per image seem to differ at: ';
-var
-  fNan:single=NaN; //NoData als Variable
-  fSed:single; //Summe quadrierte Differenzen
-  fxRes:tn2Sgl=nil; //Ergebnis-Kanal
-  fxStk:tn3Sgl=nil; //Zeitreihe für einen Kanal
-  iBnd:integer=-1; //neues Bild bei erstem Kanal
-  iCnt:integer; //Anzahl gültige Bilder
-  rHdr:trHdr; //Metadata
-  sBnd:string=''; //Kanal-Namen
-  B,I,X,Y:integer;
-begin
-  rHdr:=Header.Read(sImg);
-  if rHdr.Stk mod rHdr.Prd>0 then Tools.ErrorOut(cPrd+sImg);
-  SetLength(fxStk,rHdr.Stk div rHdr.Prd,1,1); //Dummy, Ein Kanal für jedes Bild
-  for B:=0 to pred(rHdr.Prd) do //alle Ergebnis-Kanäle
-  begin
-    sBnd+=ExtractWord(succ(B),rHdr.aBnd,[#10])+#10;
-    for I:=0 to pred(rHdr.Stk div rHdr.Prd) do //alle Vorbilder
-      fxStk[I]:=Image.ReadBand(I*rHdr.Prd+B,rHdr,sImg); //Kanal "B" aus Bild "I" laden
-    fxRes:=Tools.Init2Single(rHdr.Lin,rHdr.Scn,dWord(fNan)); //Vorgabe = ungültig
-    for Y:=0 to pred(rHdr.Lin) do
-      for X:=0 to pred(rHdr.Scn) do
-      begin
-        fSed:=0; iCnt:=0;
-        for I:=1 to high(fxStk) do
-        begin
-          if isNan(fxStk[pred(I),Y,X])
-          or IsNan(fxStk[I,Y,X]) then continue;
-          fSed+=sqr(fxStk[pred(I),Y,X]-fxStk[I,Y,X]);
-          inc(iCnt)
-        end;
-        if iCnt>0 then
-          fxRes[Y,X]:=sqrt(fSed/iCnt);
-          //fxRes[Y,X]:=sqrt(fSed)/iCnt;
-      end;
-    Image.WriteBand(fxRes,iBnd,eeHme+'timetexture'); //neues Bild für B=0, dann stapeln
-    iBnd:=B;
-  end;
-  Header.WriteMulti(rHdr,sBnd,eeHme+'timetexture');
-  Header.Clear(rHdr);
-end;
-
-// Werte-Reihe ausgleichen
-// immer drei Punkte
-// Endpunkte bleiben bestehen
-// Basis: gewichteter Mittelwert
-// Gewicht: Distanz wirkt invers quadratisch
-// Wiederholungen möglich
-
-procedure tRank.___Chain_Line(
-  faDns:tnSgl;
-  iRpt:integer);
-var
-  faTmp:tnSgl=nil; //Arbeitskopie von "faDns"
-  fLow,fHig:single; //Distanz-Faktoren
-  R,S:integer;
-begin
-  SetLength(faTmp,length(faDns));
-  for R:=1 to iRpt do
-  begin
-    move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Vorlage
-    for S:=1 to length(faDns)-2 do
-    begin
-      fLow:=abs(faTmp[pred(S)]-faTmp[S])/(faTmp[pred(S)]+faTmp[S]);
-      fHig:=abs(faTmp[S]-faTmp[succ(S)])/(faTmp[S]+faTmp[succ(S)]);
-      if (fLow=0) and (fHig=0) then continue;
-      faDns[S]:=(faTmp[pred(S)]*fHig/(fLow+fHig)+faTmp[S]+
-        faTmp[succ(S)]*fLow/(fLow+fHig))/2
-    end;
-  end;
-end;
-
-{ rLP bestimmt für jede Periode in "raDns" die multispektrale Varianz aller
-  Pixel zusammen mit einer der Nachbar-Perioden. rLP übergibt die ID der
-  besser passenden Nachbar-Periode in "raPrd.Lnk". }
-
-function tRank._Cov_Period(
-  faDns:tnSgl; //Zeitverlauf Helligkeit
-  iLow,iHig:integer): //erster, letzter Zeitpunkt in "faDns"
-  single;
-var
-  fPrd:double=0; //Summe Werteprodukt
-  fSum:double=0; //Summe Werte
-  fTms:double=0; //Summe Zeitstempel
-  iCnt:integer=0; //Anzahl gültige Abschnitte
-  S:integer;
-begin
-  Result:=0; //Vorgabe = keine Korrelation
-  for S:=iLow to iHig do //Intervall
-    if not isNan(faDns[S]) then
-    begin
-      fPrd+=faDns[S]*S;
-      fSum+=faDns[S];
-      fTms+=S;
-      inc(iCnt)
-    end;
-  if iCnt>1 then
-    Result:=(fPrd-fSum*fTms/iCnt)/pred(iCnt)
-end;
-
-// Standardabweichung relativ zur Dichte
-// mit faDns[0]<>NaN müssen alle Werte gültig sein ← Lücken vorher interpolieren
-
-function tRank.__D_eviation(
-  faDns:tnSgl; //Werte-Reihe
-  var fMwt:single): //Mittelwert
-  single; //Abweichung
-// Varianz = (∑x²-(∑x)²/n)/(n-1)
-var
-  fSum:double=0;
-  fSqr:double=0;
-  fVrz:double=0;
-  I:integer;
-begin
-  for I:=0 to high(faDns) do
-  begin
-    fSqr+=sqr(faDns[I]);
-    fSum+=faDns[I];
-  end;
-  fVrz:=(fSqr-sqr(fSum)/length(faDns))/high(faDns); //Varianz ACHTUNG Rundung!
-  Result:=sqrt(max(fVrz,0)); //Abweichung (Rundungsfehler!)
-  fMwt:=fSum/length(faDns); //Mittelwert
-end;
-
-// Werte-Reihe ausgleichen
-// Basis: arihmetisches Mittel
-// immer genau drei Punkte
-// am Rand nur zwei Punkte
-// Wiederholungen möglich
-
-procedure tRank._E_qualize(
-  faDns:tnSgl; //Werte-Reihe
-  iRpt:integer); //Wiederholungen
-var
-  faTmp:tnSgl=nil; //Arbeitskopie von "faDns"
-  iHig:integer; //höchster Index
-  R,S:integer;
-begin
-  SetLength(faTmp,length(faDns));
-  iHig:=high(faDns);
-  for R:=1 to iRpt do
-  begin
-    move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Vorlage
-    faDns[0]:=(faTmp[0]+faTmp[1])/2;
-    for S:=1 to length(faDns)-2 do
-      faDns[S]:=(faTmp[pred(S)]+faTmp[S]+faTmp[succ(S)])/3;
-    faDns[iHig]:=(faTmp[pred(iHig)]+faDns[iHig])/2;
-  end;
-end;
-
-// Ausnahmen: ein Extremwerte neben zwei normalen
-//
-
-procedure tRank._Fill_Exception(
-  faDns:tnSgl; //Zeitreihe
-  fLmt:single); //Schwelle = Abweichung / Mittelwert * Faktor
-var
-  faTmp:tnSgl=nil; //Puffer für Zeitreihe
-  iHig:integer; //höchster Index
-  I:integer;
-begin
-  // mindestens drei Punkte!
-  SetLength(faTmp,length(faDns));
-  move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Backup
-  if abs(faTmp[0]*2-(faTmp[1]+faTmp[2]))>fLmt then
-    faDns[0]:=faTmp[1]*2-faTmp[1]; //extrapolieren
-  for I:=1 to length(faTmp)-2 do
-    if abs(faTmp[I]*2-(faTmp[pred(I)]+faTmp[succ(I)]))>fLmt then //NULLDIVISION?
-      faDns[I]:=(faTmp[pred(I)]+faTmp[succ(I)])/2; //interpolieren
-  iHig:=high(faDns);
-  if abs(faTmp[iHig]*2-(faTmp[pred(iHig)]+faTmp[iHig-2]))>fLmt then //
-    faDns[iHig]:=faTmp[pred(iHig)]*2-faTmp[iHig-2]; //extrapolieren
-end;
-
-procedure tRank._O_utlier(
-  faDns:tnSgl; //Werte-Reihe
-  fLmt:single); //Minimum Abweichung = sqrt(Varianz)/Mittelwert
-// Varianz = (∑x²-(∑x)²/n)/(n-1)
-var
-  faTmp:tnSgl=nil; //Buffer
-  fDvt,fSum,fSqr:single;
-  I,K:integer;
-begin
-  SetLength(faTmp,length(faDns));
-  move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Backup
-
-  for I:=1 to length(faDns)-2 do
-  begin
-    fSum:=0; fSqr:=0;
-    for K:=pred(I) to succ(I) do
-    begin
-      fSqr+=sqr(faTmp[K]);
-      fSum+=faTmp[K];
-    end;
-
-    fDvt:=sqrt((fSqr-sqr(fSum)/3)/2);
-
-    if abs(faTmp[I]-fSum/3)>fDvt*fLmt then
-      faDns[I]:=(faDns[pred(I)]+faDns[succ(I)])/2; //Extremwert ersetzen
-
-    if I=0 then
-      if abs(faTmp[0]-fSum/3)>fDvt*fLmt then
-        faDns[0]:=(faDns[I]+faDns[succ(I)])/2; //Extremwert ersetzen
-
-    if I=pred(high(faDns)) then
-      if abs(faTmp[high(faDns)]-fSum/3)>fDvt*fLmt then
-        faDns[high(faDns)]:=(faDns[pred(I)]+faDns[I])/2; //Extremwert ersetzen
-  end;
-end;
-
-procedure tRank.__O_utlier(
-  faDns:tnSgl; //Zeitreihe
-  fLmt:single); //minimale Abweichung
-var
-  fMax:single=0; //größte Abweichung
-  iHig,iLow:integer; //Zeitpunkte vor/nach aktuellem Punkt
-  iOtl:integer=-1; //Zeitpunkt der größten Abweichung
-  I:integer;
-begin
-  for I:=0 to high(faDns) do
-  begin
-    if I=0 then iLow:=2 else iLow:=pred(I);
-    if I=high(faDns) then iHig:=length(faDns)-3 else iHig:=succ(I);
-    if faDns[I]/(faDns[iLow]+faDns[iHig])*2>fMax then
-    begin
-      iOtl:=I;
-      fMax:=faDns[I]/(faDns[iLow]+faDns[iHig])*2
-    end;
-  end;
-
-  if fMax>=fLmt then
-  begin
-    if iOtl=0 then iLow:=2 else iLow:=pred(iOtl);
-    if iOtl=high(faDns) then iHig:=length(faDns)-3 else iHig:=succ(iOtl);
-    faDns[iOtl]:=(faDns[iLow]+faDns[iHig])/2
-  end;
-end;
-
-// Kontrastausgleich
-// Punkte gewichten ← Gewicht = Distanz in Zeit + Wert
-// Varianz = (∑x²-(∑x)²/n)/(n-1)
-
-procedure tRank.___O_utlier(
-  faDns:tnSgl; //Zeitreihe
-  fFct:single;
-  iRds:integer);
-var
-  faTmp:tnSgl=nil; //Zwischenlager
-  fSum:single; //Summe Werte in Umgebung
-  iCnt:integer; //Anzahl gültige Punkte
-  I,R:integer;
-begin
-  SetLength(faTmp,length(faDns));
-  move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Backup
-  for I:=0 to high(faDns) do
-  begin
-    fSum:=0; iCnt:=0;
-    for R:=I-iRds to I+iRds do
-    begin
-      if (R<0) or (R=I) or (R>high(faDns)) then continue; //Intervall beschneiden
-      fSum+=faTmp[R];
-      inc(iCnt)
-    end;
-    if (iCnt>0) and (abs(faTmp[I]/fSum*iCnt)>fFct) then
-      faDns[I]:=fSum/iCnt;
-  end;
-end;
-
-{ rLP bestimmt für jede Periode in "raDns" die multispektrale Varianz aller
-  Pixel zusammen mit einer der Nachbar-Perioden. rLP übergibt die ID der
-  besser passenden Nachbar-Periode in "raPrd.Lnk". }
-
-{ ==> nur Helligkeit verwenden
-  ==> alternativ mit CoVarianz }
-
-procedure tRank.S_ectVariance(
-  faDns:tnSgl; //Zeitverlauf Helligkeit
-  pSml,pLrg:tpr_Prd); //erste, zweite Periode (small ID, large ID)
-var
-  fSqr:double=0; //Summe quadrierte Werte
-  fSum:double=0; //Summe Werte
-  fVrz:double=0; //Varianz aller Abschnitte
-  iCnt:integer=0; //Anzahl gültige Abschnitte
-  S:integer;
-begin
-  //Zwischenergebnisse
-  for S:=pSml^.Low to pLrg^.Hig do //gemeinsames Intervall
-  begin
-    if isNan(faDns[S]) then continue;
-    fSqr+=sqr(faDns[S]);
-    fSum+=faDns[S];
-    inc(iCnt)
-  end;
-
-  //Varianz der vereinigten Perioden
-  if iCnt>1 then
-  begin
-    fVrz+=(fSqr-sqr(fSum)/iCnt)/pred(iCnt); //Varianzen, gemeinsames Intervall
-    pSml^.Nxt:=min(fVrz,pSml^.Nxt); //Varianzen eintragen
-    pLrg^.Prv:=min(fVrz,pLrg^.Prv);
-  end;
-end;
-
-{ rLP bestimmt für jede Periode in "raDns" die multispektrale Varianz aller
-  Pixel zusammen mit einer der Nachbar-Perioden. rLP übergibt die ID der
-  besser passenden Nachbar-Periode in "raPrd.Lnk". }
-
-procedure tRank._S_gCoVariance(
-  faDns:tnSgl; //Zeitverlauf Helligkeit
-  pSml,pLrg:tpr_Prd); //erste, zweite Periode (small ID, large ID)
-var
-  fPrd:double=0; //Summe Werteprodukt
-  fSum:double=0; //Summe Werte
-  fTms:double=0; //Summe Zeitstempel
-  fVrz:double=0; //CoVarianz aller Abschnitte
-  iCnt:integer=0; //Anzahl gültige Abschnitte
-  S:integer;
-begin
-  //Zwischenergebnisse
-  for S:=pSml^.Low to pLrg^.Hig do //gemeinsames Intervall
-  begin
-    if isNan(faDns[S]) then continue;
-    fPrd+=faDns[S]*S;
-    fSum+=faDns[S];
-    fTms+=S;
-    inc(iCnt)
-  end;
-
-  //CoVarianz der vereinigten Perioden (∑xy - ∑x∑y/n)/(n-1)
-  if iCnt>1 then
-  begin
-    fVrz+=(fPrd-fSum*fTms/iCnt)/pred(iCnt); //Varianzen, gemeinsames Intervall
-    if abs(fVrz)>abs(pSml^.Nxt) then pSml^.Nxt:=fVrz; //Varianzen eintragen
-    if abs(fVrz)>abs(pLrg^.Prv) then pLrg^.Prv:=fVrz;
-  end;
-end;
-
-procedure tRank._Chain_Line(faDns:tnSgl);
-var
-  faTmp:tnSgl=nil; //Zwischenlager
-  fDns:single; //Zwischenlager
-  fFct:single; //Distanz-Faktor
-  fWgt:single; //Gewichts-Anteile
-  iRds:integer; //Umgebung
-  I,R:integer;
-begin
-  SetLength(faTmp,length(faDns));
-  move(faDns[0],faTmp[0],length(faDns)*SizeOf(single)); //Kopie als Backup
-  iRds:=3;
-  for I:=0 to high(faDns) do
-  begin
-    fDns:=0; fWgt:=0;
-    for R:=I-iRds to I+iRds do
-    begin
-      if (R<0) or (R>high(faDns)) then continue;
-      fFct:=1/power(1.2,abs(I-R));
-      fWgt+=fFct;
-      fDns+=faTmp[R]*fFct;
-    end;
-    if fWgt>0 then
-      faDns[I]:=fDns/fWgt;
-  end;
-end;
 

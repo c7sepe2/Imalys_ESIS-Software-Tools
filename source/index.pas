@@ -1087,8 +1087,9 @@ begin
     write(#13+IntToStr(iCnt));
   until (iDef/length(apEtp)>iSze) //mittlere Flächengröße
      or ((iCnt-length(apEtp))/(iCnt+length(apEtp))<0.0001); //leerlauf
+  write(#13); //gleiche Zeile
   iCnt:=length(apEtp);
-  Tools.HintOut(#13'Force.Zones: '+IntToStr(iCnt)); //mit Wagenrücklauf
+  Tools.HintOut('Force.Zones: '+IntToStr(iCnt)); //mit Wagenrücklauf
   Image.WriteBand(tn2Sgl(ixIdx),-1,eeHme+cfIdx); //Bilddaten schreiben
   Header.WriteIndex(iCnt,rHdr,eeHme+cfIdx); //Index-Header dazu
   Build._IndexTopology(iCnt,ixIdx); //Topologie-Tabelle

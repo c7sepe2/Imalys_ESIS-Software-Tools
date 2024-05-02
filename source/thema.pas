@@ -451,6 +451,7 @@ begin
     end;
     if Y and $FF=0 then write('.');
   end;
+  write(#13)
 end;
 
 procedure tReduce.IndexSort(

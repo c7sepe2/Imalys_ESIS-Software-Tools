@@ -1971,6 +1971,7 @@ begin
     if length(rHdr.Qap)>0 then sQap+=','+rHdr.Qap; //Quality-Tags cumulieren
     write(#13'Image '+IntToStr(succ(I)));
   end;
+  write(#13); //Zeilenanfang
   RenameFile(eeHme+cfStk,sTrg); //neuer Name,
 
   rHdr.aBnd:=sBnd; //neue Kanal-Namen
