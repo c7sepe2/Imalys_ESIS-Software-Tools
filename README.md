@@ -20,7 +20,7 @@ ___
 
 ### Get Started
 
-The easiest way to learn about *Imalys* is to run one of the [tutorials](documents/tutorial/Index.md). Copy and extract the [tutorial archive](documents/tutorial/README.md) to a place where you have writing permissions and follow the description. The archive includes image data, process chains, binary files and a stepwise description how to use them. The only thing you have to add is the [GDAL library](https://github.com/OSGeo/GDAL).
+The easiest way to learn about *Imalys* is to run one of the [tutorials](documents/tutorial/Index.md). Copy and extract the [tutorial data](documents/tutorial/README.md) to a place where you have writing permissions and follow the description. The tutorial includes all imalys tools and a stepwise description how to use them. The only thing you have to add is the [GDAL library](https://github.com/OSGeo/GDAL).
 
 ### Installation
 
