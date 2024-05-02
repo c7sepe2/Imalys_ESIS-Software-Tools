@@ -9,14 +9,16 @@
 - Download and extract the [image frames](../images/frames.zip) archive to your *~ESIS/frames* directory
 - Download the following [USGS Landsat atchives](https://earthexplorer.usgs.gov/) to your *~/ESIS/archives* directory:
 
-LC08_L2SP_193026_20220515.tar; 
-LC08_L2SP_193026_20220531.tar; 
-LC08_L2SP_193026_20220702.tar; 
-LC08_L2SP_193026_20220718.tar; 
-LC08_L2SP_193026_20220803.tar; 
-LC09_L2SP_193026_20220811.tar; 
-LC09_L2SP_193026_20220912.tar; 
-LC09_L2SP_193026_20221030.tar; 
+```
+LC08_L2SP_193026_20220515.tar
+LC08_L2SP_193026_20220531.tar
+LC08_L2SP_193026_20220702.tar
+LC08_L2SP_193026_20220718.tar
+LC08_L2SP_193026_20220803.tar
+LC09_L2SP_193026_20220811.tar
+LC09_L2SP_193026_20220912.tar
+LC09_L2SP_193026_20221030.tar
+```
 
 If you prefer to install the tutorial to another directory, you will have to modify the path names at the examples.
 
