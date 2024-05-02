@@ -1,7 +1,5 @@
 ## Imalys Tutorial
 
-![](../images/tools.png)under construction
-
 **[	EcoSystem Integrity Service](0_ESIS.md)**
 
 **[1	Get the Imalys tutorials](1_Prepare.md)**
