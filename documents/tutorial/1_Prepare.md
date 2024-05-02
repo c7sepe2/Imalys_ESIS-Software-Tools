@@ -5,12 +5,18 @@
 ### T1a	Download the tutorial
 
 - Create a new directory *ESIS* at your home directory
-- Add the subdirectories *binaries*, *hooks*, *images*, *frames*, *results* and *tutorial* 
-- Download the binary files [x_Imalys](../../binaries/README.md) and [r_Imalys](../../binaries/README.md) to your *~/ESIS/binary* directory
-- Download and extract the *imalys.zip* archive from [Zenodo]()
-- Copy the *image* directory of the archive to your *~/ESIS/image* directory
-- Copy the *frames* directory of the archive to your *~/ESIS/frames* directory
-- Download the [tutorial.pdf]() file to your *~/ESIS/tutorial* directory or work online
+- Add the subdirectories *archives*, *frames*, *hooks* and *results* 
+- Download and extract the [image frames](../images/frames.zip) archive to your *~ESIS/frames* directory
+- Download the following [USGS Landsat atchives](https://earthexplorer.usgs.gov/) to your *~/ESIS/archives* directory:
+
+LC08_L2SP_193026_20220515.tar; 
+LC08_L2SP_193026_20220531.tar; 
+LC08_L2SP_193026_20220702.tar; 
+LC08_L2SP_193026_20220718.tar; 
+LC08_L2SP_193026_20220803.tar; 
+LC09_L2SP_193026_20220811.tar; 
+LC09_L2SP_193026_20220912.tar; 
+LC09_L2SP_193026_20221030.tar; 
 
 If you prefer to install the tutorial to another directory, you will have to modify the path names at the examples.
 
@@ -56,7 +62,7 @@ home
 
 »user« must be exchanged by the users home directory
 
-The [home]() command and *IMALYS* at the beginning of the first line is mandatory for each process chain. »user« stands for the home directory of the user. All examples will use the default working directory *»user«/.imalys*. The directory is cleared it at the beginning of the process chain. The directory *results* is assigned to store messages and metadata. Each process and many sub-steps return messages about the progress of the processing. We recommend to store these files together with the results.
+The [home](../manual/1_Home.md) command and *IMALYS* at the beginning of the first line is mandatory for each process chain. »user« stands for the home directory of the user. All examples will use the default working directory *»user«/.imalys*. The directory is cleared it at the beginning of the process chain. The directory *results* is assigned to store messages and metadata. Each process and many sub-steps return messages about the progress of the processing. We recommend to store these files together with the results.
 
 -----
 
