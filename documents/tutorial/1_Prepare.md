@@ -39,7 +39,7 @@ Imalys uses the **GDAL library** of the [Open Source Geospatial Foundation](http
 
 ### T1c	Run executable files
 
-The executable files *x_Imalys* or *r_Imays* must be called as a command in a shell or terminal. *x_Imalys* must be called with one parameter containing the filename of the process chain (see [T1c]()). To repeat the process chain with varying parameters, *r_Imalys* must be called with the filename of the process chain and the variable list as parameters (see [T7: Process Chain Variables](7a_Variables.md)). 
+The executable files *x_Imalys* or *r_Imays* must be called as a command in a shell or terminal. *x_Imalys* must be called with one parameter containing the filename of the process chain (see manual [Execute](../manual/0_Execute.md)). To repeat the process chain with varying parameters, *r_Imalys* must be called with the filename of the process chain and the variable list as parameters (see tutorial [Process Chain Variables](7a_Variables.md)). 
 
 ```
 x_Imalys »path_to_process-chain«
