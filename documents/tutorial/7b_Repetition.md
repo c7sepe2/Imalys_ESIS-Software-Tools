@@ -2,7 +2,7 @@
 
 Variables can also be used to repeat a whole process chain with different inputs and produce corresponding outputs without further interaction. In this case *r_Imalys* has to be called with two parameters, the process chain and a variable table.
 
-**Attention:** This example requires additional image data and frames from four German cities! They are not included in the tutorial data.
+**Attention:** This example requires additional image data and frames of four German cities! They are not included in the tutorial data.
 
 ```
 r_Imalys /home/»user«/ESIS/hooks/example_7b /home/»user«/ESIS/hooks/variables_7b
