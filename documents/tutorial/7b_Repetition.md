@@ -1,6 +1,8 @@
 ### T7b	Process repetition
 
-Variables can also be used to repeat a whole process chain with different inputs and produce corresponding outputs without further interaction. In this case *Imalys* has to be called with two parameters, the process chain and a variable table.
+Variables can also be used to repeat a whole process chain with different inputs and produce corresponding outputs without further interaction. In this case *r_Imalys* has to be called with two parameters, the process chain and a variable table.
+
+**Attention:** This example requires additional image data and frames from four German cities! They are not included in the tutorial data.
 
 ```
 r_Imalys /home/»user«/ESIS/hooks/example_7b /home/»user«/ESIS/hooks/variables_7b
@@ -41,9 +43,9 @@ c4738	Leipzig
 c6730	Nürnberg
 ```
 
-Example 7b shows how to repeat example a process chain (above) for different maps. The *frames* for the image import *c????* and the names of the resulting images must be given by variables. The imported images are reduced to one median image (*bestof*) and exported as GEO-Tiff with the name of the map and the city like *c4738_Leipzig.tif*.
+Example 7b shows how to repeat a process chain (above) for different maps. The *frames* for the image import and the names of the resulting images (*target*) must be given by the variable table (above). The imported images are reduced to one median image (*bestof*) and exported as GEO-Tiff with the name of the map and the city like *c4738_Leipzig.tif*.
 
-The variable list only contains the values. All variables for one run of the process chain must be given in one line. Each line will induce another run of the process chain. The variables are divided by tabs. The columns represent the numbers of the variables.
+The variable table only contains the values. All variables for one run of the process chain must be given in one line. Each line will induce another run of the process chain. The variables are divided by tabs. The columns represent the numbers of the variables starting with "1".
 
 In this case the process chain will be repeated for the cities of Berlin-West, Berlin-Mitte, Leipzig and Nürnberg.
 

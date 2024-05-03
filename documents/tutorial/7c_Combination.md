@@ -1,6 +1,6 @@
 ### T7c	Combine database, filter and repetition
 
-A process chain can include repeated processes. In this case the archives of different cities are extracted using a *database*  and the result is combined to two images of each city.
+A process chain can include repetition and several processes. In this case the archives of different cities are extracted using a *database*  and the result is combined to two images of each city.
 
 ```
 IMALYS [example 7c]
