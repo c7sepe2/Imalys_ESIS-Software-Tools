@@ -54,7 +54,7 @@ If the selected images have different coverages or the result should be restrict
 
 `projection = image filename`
 
-If “pure” images should be combined with projected ones, the “pure” image can be take the coordinates of a projected one. The option only needs the filename of the projected image. "Procection" takes the top left corner and the pixel size from the passed template.
+If “pure” images should be combined with projected ones, the “pure” image can take the coordinates of a projected one. The option only needs the filename of the projected image. "Projection" takes the top left corner and the pixel size from the passed template.
 
 ------
 
@@ -74,9 +74,7 @@ As a standard procedure all image values are transferred to a 32 bit float forma
 
 `target = image filename`
 
-The *target* option renames the result of the compile command. The command was introduced if two compile commands should be given in succession.
-
-input value
+The *target* option renames the result of the compile command. The parameter was introduced if two compile commands should be given in succession.
 
 ------
 
@@ -89,17 +87,18 @@ compile
 	period = 20220501 – 20220731
 ```
 
-This first example stacks all images taken at May to July. The images are taken from the working directory. As no target name is given the result is named “compile” and stored at the working directory.
+This first example stacks all images taken between May and July. The images are taken from the working directory. As no target name is given the result is named “compile” and stored at the working directory.
 
 ```
 IMALYS [compile]
 …
 compile
-	search=/home/*user*/ESIS/results/*2022*.tif
-	frame=/home/*user*/ESIS/frames/c4738.gpkg
+	search = /home/*user*/ESIS/results/*2022*.tif
+	frame = /home/*user*/ESIS/frames/c4738.gpkg
+	target = Leipzig_2022
 ```
 
-The second example stacks all images taken at 2022 from the “result” directory and cuts them to the frame “c4738”. The “TIFF” format is converted to “ENVI” during the stacking process. 
+The second example stacks all images taken at 2022 from the “results” directory and cuts them to the frame “c4738” and stored them to the working directory. The result is called "Leipzig_2022". The “TIFF” format is converted to “ENVI” during the stacking process. 
 
 -----
 

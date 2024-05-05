@@ -34,7 +34,9 @@ More than one image can be processed at the same time if they are stacked using 
 
 The *variance* parameter determines the variance of individual pixels based on a standard distribution for all individual bands in the source image. The process returns a multispectral image of variances. If the *flat* parameter is added, the result will be reduced to one band.
 
-​	![image-20240319181352369](../images/5_variance.png)	v: values; i: items; n: item count
+​	![image-20240323125742064](../images/5_variance.png)	v: values; i: items; n: item count
+
+Range: [0 … positive values]
 
 ---
 
@@ -48,6 +50,8 @@ The *regression* parameter returns the regression of individual pixels of all ba
 
 ​	![image-20240319181602245](../images/5_regression.png)	t: time; v: values; i: items; n: item count
 
+Range: [negative values … positive values]
+
 ---
 
 ### Flat
@@ -56,9 +60,13 @@ The *regression* parameter returns the regression of individual pixels of all ba
 
 `flat = true`
 
-The *flat* process uses the first principal component of all bands to reduce a multispectral result to one band showing the overall brightness.
+Some *reduce* commands return multispectral results. The *flat* option reduces them to one single band. The *flat* process uses the first principal component of all bands to reduce a multispectral image to one band showing the overall brightness.
 
 ​	![](../images/5_Flat.png)	v: values; i: items
+
+Range: [0 … positive values]
+
+The process will convert negative values into positive ones.
 
 ---
 
@@ -68,9 +76,11 @@ The *flat* process uses the first principal component of all bands to reduce a m
 
 `execute = difference`
 
-The process returns the difference between two images. The result a multispectral image of differences. Using the *flat* option the result is further reduced to one band.
+The process returns the difference between two images. For multispectral images the result is a multispectral image of differences. Using the *flat* option the result can be further reduced to one band.
 
 ​	![image-20240319182407876](../images/5_Difference.png)	v: pixel value
+
+Range: [negative values … positive values]
 
 ---
 
@@ -86,6 +96,8 @@ Both the NIRv and the NDVI index are calculated as the product of near infrared 
 
 NirV: ![image-20240319182841085](../images/5_NirV.png)	N: Near infrared value; R: Red band value
 
+Range: [-1 … +1]
+
 ---
 
 ### LAI (deactivated)
@@ -94,7 +106,7 @@ NirV: ![image-20240319182841085](../images/5_NirV.png)	N: Near infrared value; R
 
 `execute = LAI`
 
-The *LAI* parameter gives the proportion of leaf surface compared to the ground surface covered by the plants. The LAI was introduced as a proxy for field work. Simulated LAI values by means of remote sensing are of minor quality.
+The *LAI* parameter gives the proportion of leaf surface compared to the ground surface covered by the plants. The LAI was introduced as a proxy for field work. Simulated LAI values by means of estimating the photosynthetic active radiation (PAR) are of minor quality.
 
 ---
 
@@ -104,9 +116,13 @@ The *LAI* parameter gives the proportion of leaf surface compared to the ground 
 
 `execute = brightness`
 
-The process returns the brightness of all bands in the passed image. For multispectral images, the *brightness* is individually calculated for each band. The result is one multispectral image with the the first principal component of each band. Using the *flat* option the result is further reduced to one band.
+The process returns the brightness of all bands in the passed images. A stack of multispectral images is reduced to one multispectral image, a single image is reduced to a single band. *Brightness* uses the first principal component to reduce the passed bands. For a stack of multispectral images each band is reduced separately. Using the *flat* option the result is further reduced to one band.
 
 ​	![image-20240319183231922](../images/5_brigthness.png.png)	v: values; i: items; 
+
+Range: [0 … positive values]
+
+The process will convert negative values into positive ones.
 
 ---
 
@@ -116,7 +132,11 @@ The process returns the brightness of all bands in the passed image. For multisp
 
 `execute = principal`
 
-The process extracts the first *count* principal components from a n-dimensional image. The process tries to extract the most significant image properties to a smaller number of bands. 
+The process extracts the first *count* (below) principal components from a n-dimensional image. The process tries to extract the most significant image properties to a smaller number of bands. 
+
+The process extracts the most significant image property (overall brightness), stores it as the first band of the result, deletes the extracted property from the original data and repeats the process with the remainder. In many cases the information content of original can be concentrated to a few result bands. 
+
+Range: [0 … positive values]
 
 ---
 
@@ -124,7 +144,7 @@ The process extracts the first *count* principal components from a n-dimensional
 
 **Image dimensions after principal component rotation**
 
-`count = number_of_dimensions` (bands)
+`count = number of new dimensions` (bands)  must be lesser than the original
 
 only together with *principal*
 
@@ -142,6 +162,8 @@ The *mean* parameter gives the arithmetic mean of all image bands provided. For 
 
 ​	![image-20240319183835174](../images/5_mean.png)	v: values; i: items; n: item count
 
+Range: [negative values … positive values]
+
 ---
 
 ### Median
@@ -150,9 +172,13 @@ The *mean* parameter gives the arithmetic mean of all image bands provided. For 
 
 `execute = median`
 
-The median reflects the most common value of each pixel in a stack of bands or images. The process returns a multispectral image of most common values. Using the *flat* option the result is further reduced to one band. The *median* process can mask rare values. Clouds or smoke will disappear if more than the half of all pixels show undisturbed values.
+The median reflects the most common value of each pixel in a stack of bands or images. For a stack of multispectral images the process returns a multispectral image of most common values for each band. Using the *flat* option the result is further reduced to one band. 
 
 ​	*Value in the middle of a sorted value list.*
+
+Range: [negative values … positive values]
+
+The *median* process can mask rare values. Clouds or smoke will disappear if more than the half of all pixels show undisturbed values.
 
 ---
 
@@ -163,6 +189,8 @@ The median reflects the most common value of each pixel in a stack of bands or i
 `execute = bestof`
 
 The *bestof* process returns an optimized image from one or more images with lesser quality. The typical import is a short time course. *Bestof* works better if the input images show no holes.
+
+*Bestof* depends on the quality control of the [import](3_Import.md) command. If three ore more images exceed the minimum quality restraints the process returns the median of all passed pixels. If two images of equal quality are available, the process returns the mean of all pixels. If the quality differs for more than half of the indicator, only he better image is returned. If only one image is available, there is no choice.
 
 ---
 
@@ -193,9 +221,9 @@ reduce
 	target=NDVI
 ```
 
-In this example two *reduce* processes follow each other. The first reduces the result of the last [compile](4_Compile.md) command to one multispectral image. This does only make sense if the result of the image *compile* consist of several images (see second example under [compile](4_Compile.md)). 
+In this example two *reduce* processes follow each other. The first reduces the result of the last [compile](4_Compile.md) command to one multispectral image. This does only make sense if the result of the *compile* command includes  several images (see second example under [compile](4_Compile.md)). The result is called "summer" to protect it from the second *reduce* process.
 
-A *target* is given to rename the result of the reduction. Without a *target* the second *reduce* process would override the result of the first. The second *reduce* uses the result of the first to calculate the normalized vegetation index. 
+Without the *target* option the second *reduce* process would override the result of the first. The second *reduce* uses the result of the first one to calculate the normalized vegetation index. 
 
 Files stored in the working directory can be called only by their name.
 

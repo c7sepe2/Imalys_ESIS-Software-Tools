@@ -46,6 +46,8 @@ The *texture* process extracts the differences between each pixel and its neighb
 
 ​	![image-20240320101917783](../images/6_texture.png)	v: pixel value; i,j: adjacent pixels
 
+Range: [0 … positive value]
+
 ------
 
 ### Normal
@@ -57,6 +59,8 @@ The *texture* process extracts the differences between each pixel and its neighb
 The normalized texture does the same as *texture* but with normalized brightness. Value differences in bright regions like industrial areas will be high even if the relative differences are low. The opposite is true for dark forests. 
 
 ​	![image-20240320110003480](../images/6_normal.png)	vi: pixel value; vj: neighbor pixel value; b: bands
+
+Range: [0 … 4] for one band
 
 ------
 
@@ -70,6 +74,8 @@ The *inverse* process creates a new image with the Inverse Difference Moment (ID
 
 ​	![image-20240320102944127](../images/6_inverse.png)	v: values; i,j: neighbor pixels; b: bands
 
+Range: [0 … 4] for one band
+
 ------
 
 ### Deviation
@@ -80,9 +86,11 @@ The *inverse* process creates a new image with the Inverse Difference Moment (ID
 
 Rao’s diversity uses variance instead of texture to evaluate the spectral diversity of landscape structures. The variance is insensitive for the spatial distribution of the pixels within the kernel. 
 
-*This process is deprecated. We recommend to use Rao’s diversity based on zones (see Appendix D: Features:Entropy).*
-
 ​	![image-20240320103330317](../images/6_entropy.png)	dij: Density difference; I,j: neighbor pixels; pi, pj: frequency of pixel values “i” and “j”
+
+Range: [0 … positive value]
+
+*This process is deprecated. We recommend to use Rao’s diversity based on zones (see Appendix D: Features:Entropy).*
 
 ------
 
@@ -94,9 +102,11 @@ see [mapping](9_Mapping.md) for details
 
 Rao’s diversity can also be based on classes. The classes can exist or calculated by the [mapping](9_Mapping.md) command. Use *mapping* with the parameter *entropy* to apply the transformation.
 
-*This process is deprecated. We recommend to use Rao’s diversity based on zones (see Appendix D: Features:Entropy).*
-
 ​	![image-20240320103825377](../images/6_deviation.png)	d: spectral distance between classes; p: class frequency; k,i: different classes
+
+Range: [0 … positive value]
+
+*This process is deprecated. We recommend to use Rao’s diversity based on zones (see Appendix D: Features:Entropy).*
 
 ------
 
@@ -109,6 +119,8 @@ Rao’s diversity can also be based on classes. The classes can exist or calcula
 The *lowpass* process reduces the local contrast of the image data according to the selected *radius*. *Lowpass* uses a kernel with a normalized Gaussian distribution. The kernel size can be selected freely. *Imalys* implements large kernels through an iterative process to significantly reduce the processing time.
 
 ​	![image-20240320104318833](../images/6_LowPass.png)	v: image values; k: kernel values; I,j: kernel index
+
+Range: [negative value … positive value]
 
 ------
 
@@ -126,6 +138,10 @@ The *lowpass* process reduces the local contrast of the image data according to 
 
 ​	![image-20240320104658347](../images/6_laplace.png)	v: values; k: inner kernel; g: outer kernel; I,j: kernel indices
 
+Range: [negative value … positive value]
+
+The Laplace process increases the image contrast. In particular edges are emphasized. The size of the emphasized structures depends on the difference of the two radius inputs.  
+
 ------
 
 ### elevation
@@ -135,6 +151,8 @@ The *lowpass* process reduces the local contrast of the image data according to 
 `execute = elevation`
 
 The command generates three layers called “slope”, “exposition” and “shade” from any elevation model. See *hillshade* to superimpose images with shading.
+
+Range: [0 … 1] for each band
 
 ------
 
@@ -146,6 +164,10 @@ The command generates three layers called “slope”, “exposition” and “s
 
 The *hillshade* process can superimpose the shading over each other image thus providing a 3D look to each other result.
 
+Range: [negative value … positive value] 
+
+------
+
 ------
 
 ### target
@@ -154,7 +176,7 @@ The *hillshade* process can superimpose the shading over each other image thus p
 
 `target = filename`
 
-The *target* option renames the result of the last command. The new name is restricted to the working directory. Only the last result will be affected. Choose the [export](11_Export.md) command to store one or more results at a different place.
+The *target* option renames the result of the last command. The new name is restricted to the working directory. Only the last result will be affected. Choose the [export](11_Export.md) command to store results at a different place.
 
 ------
 
@@ -176,7 +198,7 @@ kernel
 	outer=3
 ```
 
-For this example two images stored as Geo-Tiff at the users “results” directory are used to calculate two textures and the Laplace edge detection. External images must be stacked and stored in the working directory ([Compile](4_Compile.md)) before they can be processed. The new name “period” is assigned to call the kernel process. The process returns the textures using a 5x5 pixel kernel and the edge detection result with a 3:1 enhancement.
+For this example two images stored as Geo-Tiff at the users “results” directory are used to calculate a normalized texture and the Laplace edge detection. External images must be stacked and stored in the working directory ([compile](4_Compile.md)) before they can be processed. The new name “period” is assigned to call the kernel process. The process returns the textures using a 5x5 pixel kernel and the edge detection result with a 3:1 enhancement.
 
 -----
 
