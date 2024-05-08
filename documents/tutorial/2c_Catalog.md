@@ -23,4 +23,4 @@ Tutorial 2c creates a position and size database of all archives at the director
 
 -----
 
-[Index](Index.md)
+[Previous](2b_Quality.md) – [Index](Index.md) – [Next](2d_Autoselect.md)
