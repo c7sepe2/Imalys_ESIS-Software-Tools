@@ -61,4 +61,4 @@ Some features like *diversity* relay on both, spectral and geometrical features.
 
 -----
 
-[Index](Index.md)
+[Previous](4a_Delineate.md) – [Index](Index.md) – [Next](5a_MapPixels.md)
