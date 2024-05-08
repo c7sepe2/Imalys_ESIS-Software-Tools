@@ -56,5 +56,5 @@ Different months given under [compile](../manual/4_Compile.md) and [export](../m
 
 -----
 
-[Previous](3_Pixel.md) – [Index](Index.md) –[ Next](3b_TimeSeries.md)
+[Previous](2e_Optimize.md) – [Index](Index.md) – [Next](3b_TimeSeries.md)
 
