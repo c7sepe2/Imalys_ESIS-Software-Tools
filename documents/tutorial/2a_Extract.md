@@ -1,4 +1,4 @@
-## T2	Seamless image products
+## T2a	Seamless image products
 
 Satellite image data are shipped in compressed archives, the tracks are cut into tiles, different bands are stored to different files and the image values support compression. The [import](../manual/3_Import.md) and the [compile](../manual/4_Compile.md) command are designed to collect the necessary data and combine them to a seamless and calibrated image within a given frame. The second task of the [import](../manual/3_Import.md) process is to store all images with a common projection, pixel size and file format.
 
@@ -63,4 +63,4 @@ The intermediate results are stored at the working directory *»user«/.imalys*.
 
 -----
 
-[Index](Index.md)
+[Previous](1_Prepare.md) – [Index](Index.md) – [Next](2b_Quality.md)
