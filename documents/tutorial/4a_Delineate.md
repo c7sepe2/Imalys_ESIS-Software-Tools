@@ -50,4 +50,4 @@ Zones can be created as cascades where smaller zones fill larger ones without in
 
 -----
 
-[Index](Index.md)
+[Previous](3f_Entropy.md) – [Index](Index.md) – [Next](4b_Features.md)
