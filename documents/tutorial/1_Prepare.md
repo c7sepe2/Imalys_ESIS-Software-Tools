@@ -72,5 +72,5 @@ The result names can be changed using the *target* command. Existing files will 
 
 -----
 
-[Previous](Index.md) – [Index](Index.md) –[ Next](2_Import.md)
+[Previous](Index.md) – [Index](Index.md) –[ Next](2a_Extract.md)
 
