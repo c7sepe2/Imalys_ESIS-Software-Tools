@@ -27,5 +27,5 @@ Tutorial 2e is nearly identical to tutorial 2b except the time period under [Com
 
 ----
 
-[Previous](1_Prepare.md) – [Index](Index.md) –[ Next](3a_Vegetation.md)
+[Previous](2d_Autoselect.md) – [Index](Index.md) –[ Next](3a_Vegetation.md)
 
