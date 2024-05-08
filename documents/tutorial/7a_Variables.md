@@ -35,5 +35,5 @@ Tutorial 7a shows how a variable definition under *replace* is exchanged in the 
 
 -----
 
-[Index](Index.md)
+[Previous](6_Export.md) – [Index](Index.md) – [Next](7b_Repetition.md)
 
