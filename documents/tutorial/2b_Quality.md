@@ -36,4 +36,4 @@ The results of the [compile](../manual/4_Compile.md) and the [reduce](../manual/
 
 -----
 
-[Index](Index.md)
+[Pevious](2a_Extract.md) – [Index](Index.md) [Next](2c_Catalog.md)
