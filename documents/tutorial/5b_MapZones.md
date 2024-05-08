@@ -37,5 +37,5 @@ Tutorial 5b shows how to classify zones instead of pixels. The image input is ta
 
 -----
 
-[Index](Index.md)
+[Previous](5a_MapPixels.md) – [Index](Index.md) – [Next](5c_MapObjects.md)
 
