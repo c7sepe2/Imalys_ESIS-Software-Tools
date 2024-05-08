@@ -8,5 +8,5 @@ Due to this statistical base the method generates definitions for objects that a
 
 -----
 
-[Index](Index.md)
+[Previous](5c_MapObjects.md) – [Index](Index.md) – [Next](5e_Compare.md)
 
