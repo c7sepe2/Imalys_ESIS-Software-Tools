@@ -2,25 +2,13 @@
 
 ------
 
-### T1a	Download the tutorial
+### T1a	Download the tutorial data
 
 - Create a new directory *ESIS* at your home directory
-- Add the subdirectories *archives*, *frames*, *hooks* and *results* 
-- Download and extract the [image frames](../images/frames.zip) archive to your *~ESIS/frames* directory
-- Download the following [USGS Landsat atchives](https://earthexplorer.usgs.gov/) to your *~/ESIS/archives* directory:
+- download the necessary [image and vector data](https://zenodo.org/records/11097359) 
+- extract the archive to the new *ESIS* directory 
 
-```
-LC08_L2SP_193026_20220515.tar
-LC08_L2SP_193026_20220531.tar
-LC08_L2SP_193026_20220702.tar
-LC08_L2SP_193026_20220718.tar
-LC08_L2SP_193026_20220803.tar
-LC09_L2SP_193026_20220811.tar
-LC09_L2SP_193026_20220912.tar
-LC09_L2SP_193026_20221030.tar
-```
-
-If you prefer to install the tutorial to another directory, you will have to modify the path names at the examples.
+The examples at the tutorial will refer to this data set. If you prefer to install the tutorial to another directory, you will have to modify the path names at the examples.
 
 ------
 
@@ -64,7 +52,7 @@ home
 
 »user« must be exchanged by the users home directory
 
-The [home](../manual/1_Home.md) command and *IMALYS* at the beginning of the first line is mandatory for each process chain. »user« stands for the home directory of the user. All examples will use the default working directory *»user«/.imalys*. The directory is cleared it at the beginning of the process chain. The directory *results* is assigned to store messages and metadata. Each process and many sub-steps return messages about the progress of the processing. We recommend to store these files together with the results.
+The [home](../manual/1_Home.md) command and *IMALYS* at the beginning of the first line is mandatory for each process chain. »user« stands for the home directory of the user. All examples will use the default working directory *»user«/.imalys*. The directory can be cleared by *clear=true* at the beginning of the process chain. The directory *results* is assigned to store messages and metadata. Each process and many sub-steps return messages about the progress of the processing. We recommend to store these files together with the results.
 
 -----
 
