@@ -51,5 +51,4 @@ In this case the process chain will be repeated for the cities of Berlin-West, B
 
 -----
 
-[Index](Index.md)
-
+[Previous](7a_Variables.md) – [Index](Index.md) – [Next](7c_Combination.md)
