@@ -19,5 +19,5 @@ Special conditions apply to zones, classes and vectors.
 
 -----
 
-[Index](Index.md)
+[Previous](5e_Compare.md) – [Index](Index.md) – [Next](7a_Variables.md)
 
