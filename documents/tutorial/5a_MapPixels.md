@@ -47,4 +47,4 @@ Tutorial 5a shows how to classify a multispectral and multitemporal image for 14
 
 -----
 
-[Index](Index.md)
+[Previous](4b_Features.md) – [Index](Index.md) – [Next](5b_MapZones.md)
