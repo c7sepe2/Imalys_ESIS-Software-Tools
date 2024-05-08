@@ -41,5 +41,5 @@ Tutorial 5c: The call of an object based classification is almost identical to a
 
 -----
 
-[Index](Index.md)
+[Previous](5b_MapZones.md) – [Index](Index.md) – [Next](5d_Extended.md)
 
