@@ -36,4 +36,4 @@ Tutorial 2d	uses an image [Catalog](../manual/2_Catalog.md) to import all exampl
 
 -----
 
-[Index](Index.md)
+[Previous](2c_Catalog.md) – [Index](Index.md) – [Next](2e_Optimize.md)
