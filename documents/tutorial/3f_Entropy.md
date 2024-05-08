@@ -39,4 +39,4 @@ The classification needs no references because Rao’s entropy only needs the fr
 
 -----
 
-[Previous](3e_Entropy.md) – [Index](Index.md) –[ Next](4_Zones.md)
+[Previous](3e_Outliers.md) – [Index](Index.md) – [Next](4a_Delineate.md)
