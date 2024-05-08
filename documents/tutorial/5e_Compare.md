@@ -8,5 +8,4 @@ It is not easy to determine a temporal, spatial or combined spatio-temporal link
 
 -----
 
-[Index](Index.md)
-
+[Previous](5d_Extended.md) – [Index](Index.md) – [Next](6_Export.md)
