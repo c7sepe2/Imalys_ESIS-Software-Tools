@@ -38,4 +38,4 @@ export
 
 -----
 
-[Index](Index.md)
+[Previous](7b_Repetition.md) – [Index](Index.md) – [Next](Index.md)
