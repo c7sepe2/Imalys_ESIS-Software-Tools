@@ -8,4 +8,4 @@ The *Imalys* software library is documented in three forms:
 
 - [background](background/README.md) material explaining algorithms and concepts
 
-Unfortunately the entire tutorial is too large to be stored at GitHub. Explanations and definitions  are stored locally, the complete tutorial is available at [Zenodo]().
+Unfortunately the entire tutorial is too large to be stored at GitHub. Explanations and definitions are stored locally, the necessary training data are available at [Zenodo](https://zenodo.org/records/11097359).
