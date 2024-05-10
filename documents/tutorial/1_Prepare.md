@@ -4,6 +4,8 @@
 
 ### T1a	Download the tutorial data
 
+The tutorial uses sample image data of the Landsat 8/9 sensor as provided by the [USGS](https://earthexplorer.usgs.gov/). The original archives are reduced to the visible bands.
+
 - Create a new directory *ESIS* at your home directory
 - download the necessary [image and vector data](https://zenodo.org/records/11097359) 
 - extract the archive to the new *ESIS* directory 
