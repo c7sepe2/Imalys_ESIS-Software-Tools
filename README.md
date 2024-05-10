@@ -2,12 +2,6 @@
 
 In the ESIS project we are trying to put environmental indicators on a well-defined and reproducible basis. The *Imalys* software library is supposed to generate the remote sensing products defined for ESIS. The library provides tools to select, extract, transform and combine raster and vector data. Image quality, landscape diversity, change and different landuse types can be analyzed in time and space. Landuse borders can be delineated and typical landscape structures can be characterized by a self adjusting process.
 
-Most of the methods and analyses implemented in *Imalys* are also available with commercial software and/or open source solutions. The decisive factor for the *Imalys* concept was to bundle all necessary commands and parameters into one process that contains all sub-steps and (depending on the application) only requires location, time and resulting indicators as input. 
-
-*Imalys* was designed as a collection of building blocks (tools) to extract defined landscape properties (traits) from public available data. The whole process chain is controlled by predefined hooks and runs without manual interaction. The tools are interchangeable and can be rearranged for new tasks. *Imalys* is available as [source code](source/README.md) and as [executable](binaries/README.md) files. *Imalys* is designed to run under a server environment but can also be used on any PC.
-
-For detailed information please refer to our [tutorials](documents/tutorial/Index.md), the [manual](documents/manual/Index.md) or the [background documents](documents/background/README.md) .
-
 ___
 
 
@@ -17,10 +11,13 @@ ___
 
 ___
 
+Most of the methods and analyses implemented in *Imalys* are also available with commercial software and/or open source solutions. The decisive factor for the *Imalys* concept was to bundle all necessary commands and parameters into one process that contains all sub-steps and (depending on the application) only requires location, time and resulting indicators as input. 
+
+*Imalys* was designed as a collection of building blocks (tools) to extract defined landscape properties (traits) from public available data. The whole process chain is controlled by predefined hooks and runs without manual interaction. The tools are interchangeable and can be rearranged for new tasks. *Imalys* is available as [source code](source/README.md) and as [executable](binaries/README.md) files. *Imalys* is designed to run under a server environment but can also be used on any PC. For detailed information please refer to our [tutorials](documents/tutorial/Index.md), the [manual](documents/manual/Index.md) or the [background documents](documents/background/README.md) .
 
 ### Get Started
 
-The easiest way to learn about *Imalys* is to run one of the [tutorials](documents/tutorial/Index.md). Copy and extract the [tutorial data](documents/tutorial/README.md) to a place where you have writing permissions and follow the description. The tutorial includes all imalys tools and a stepwise description how to use them. The only thing you have to add is the [GDAL library](https://github.com/OSGeo/GDAL).
+The easiest way to learn about *Imalys* is to run one of the [tutorials](documents/tutorial/Index.md). Copy and extract the [tutorial data](https://zenodo.org/records/11097359) to a place where you have writing permissions and follow the description. The tutorial includes all imalys tools and a stepwise description how to use them. The only thing you have to add is the [GDAL library](https://github.com/OSGeo/GDAL).
 
 ### Installation
 
